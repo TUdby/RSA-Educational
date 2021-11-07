@@ -407,74 +407,210 @@ explanation
 
 ## 8. The Chinese Remainder Theorem
 
+Now we are ready to add the chinese remainder theorem. First we will look
+at the theorem itself in general, then we will see what it means for RSA.
+
+The Chinese Remainder Theorem (CRT) is about answering the following type of question. If I have h mod a and k mod b, is there a number x that is congruent to both numbers? If so, what is it?
+
 <img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
 
-
+In fact, CRT asks this question for an arbitrary amount of numbers. We could add a j mod c, a g mod d and so on. However, for RSA we are going to look at just two numbers so we’ll keep it at that for now. A little bit of thought will show how all results can generalize to larger amounts of numbers. Let’s understand this question better by looking at an example.
 
 <img src="imgs/8. ChineseRemainderTheorem/QuestionExample.png">
 
+Is there an x that is congruent to both of these? Let’s try to create such an x. Were going to try to create a number in two parts, the mod 5 part and the mod 4 part.
+
 <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess1.png">
+
+In the mod 5 section, I want a number that will reduce to 3, but I also don’t 
+want it to interfere with the mod 4 section (and vice versa). To stop it from 
+interfering with the mod 4 section, I could multiply everything in the mod 5 
+section by 4. That way, when I reduce mod 4 it will reduce to zero. Likewise, I 
+can put a five in the mod 4 section for a symmetric effect.
 
 <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess2.png">
 
+So now the question is whether there is a number I can multiply by 4 and reduce by 5 to get 3. Likewise, is there a number that multiplies by 5 and reduces by 4 to get 2? A little guess and check will confirm the following numbers as valid (we will soon move beyond guess and check, don’t worry).
+
 <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess3.png">
+
+We now have a value for x, but is this the only answer? Say we multiplied 5 
+times 4 together and get 20, what would happen if we added 20 to x? If we 
+reduced it mod 5 this number we are adding reduces to zero and so doesn’t stop 
+x from reducing to 3 mod 5. The same happens with mod 4. So adding 20, or any 
+multiple of 20, will always return a valid value for x. All numbers that can be 
+created such a way will reduce to a single value mod 20, so the complete answer 
+can be stated as follow:
 
 <img src="imgs/8. ChineseRemainderTheorem/ExampleAnswer.png">
 
+Let’s take it up a notch. Can I create a method to reconstruct x for any 
+arbitrary number in mod 4 and any number mod 5? A method where I can always 
+find x where 
+
 <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralQuestion.png">
+
+Now I can’t do the guess and check like before (and good riddance), so this 
+method needs to be far more algorithmically sound. First, lets start as we did 
+before by placing 4 in a mod 5 section and 5 in a mod 4 section.
 
 <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess1.png">
 
+But now ask, what if I found a number that was the inverse of 4 mod 5 and 
+multiplied it into the mod 5 section? By definition, the mod 5 section would 
+reduce to one. The same could be done by putting the inverse of 5 mod 4 in the 
+mod 4 section. Then, if I multiply h into the mod 5 section, x would reduce to 
+h mod 5, whatever h is. Likewise with k in the mod 4 section.
+
+So we need to find a number that is the inverse of 4 mod 5 and the inverse of 5 
+mod 4. Thankfully, the extended Euclidean algorithm finds both of these at the 
+same time! Doing the  work, we find that:
+
 <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess2.png">
+
+So x can be set up as follows.
 
 <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess3.png">
 
+Finally, remember that all possible x's are congruent to this x mod 5 times 4.
+
 <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralAnswer.png">
+
+To take it up one more notch, lets now work with any generic modulus number, 
+rather than 4 and 5. Going through the same logic that we have already done, 
+you can see that if you want an x where 
 
 <img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
 
+Then x can be constructed as
+
 <img src="imgs/8. ChineseRemainderTheorem/GeneralAnswer.png">
+
+Notice that that we can only find r and is if a and b are coprime, otherwise 
+the inverses don’t exist. This is the general conclusion of CRT, that x exists 
+if the modulo numbers are coprime and can be constructed according to the 
+formula above.
+
+Let’s now build up to why CRT can help us in RSA. First lets say we have the 
+inverses of our primes (found using the extended Euclidean):
 
 <img src="imgs/8. ChineseRemainderTheorem/PrimeInverses.png">
 
+Now let’s say we have a number k mod n. Remember that n is the semiprime made 
+of multiplying p and q together. We can break k into mod p and mod q and 
+reassemble it using r and s.
+
 <img src="imgs/8. ChineseRemainderTheorem/BreakAndBuildProcess.png">
+
+Now let me define two functions. First is delta, it takes a number mod n and 
+breaks it into an ordered pair.
 
 <img src="imgs/8. ChineseRemainderTheorem/Delta.png">
 
+Notice how delta does the ‘break apart’ process from CRT? Now define delta 
+inverse. It takes in the ordered pair and puts out a number mod n.
+
 <img src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
+
+This function clearly does the ‘stitching together’ process that we found in 
+CRT. See how delta inverse undoes delta?
 
 <img src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
 
+Now for some more symbols. The symbol on the left means “the set of integers 
+mod n”, the symbol on the right means “the set of ordered pairs containing an 
+integer mod p and an integer mod q”.
+
 <img src="imgs/8. ChineseRemainderTheorem/Integers.png">
+
+n this context, an arrow from one set to another means that the set is “mapped” 
+to the set it points to. In other words, its elements are mapped to the 
+elements of the other set. If a function is put above the arrow, it shows that 
+the function is what is defining the mapping (there’s another way of notating 
+this that is more common, but this way is more convenient for us for reasons 
+that will make sense in a second). Using this notation, see that delta ‘maps’ 
+from the set of integers mod n to the set of ordered pairs, and delta inverse 
+maps in the opposite direction.
 
 <img src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
 
+We are almost ready to tie this into RSA encryption, we just need one more 
+important result from CRT. First, there is a rule in modular arithmetic that 
+states: 
+
 <img src="imgs/8. ChineseRemainderTheorem/MultiplicationRule.png">
+
+Using this rule, see if you can follow this:
 
 <img src="imgs/8. ChineseRemainderTheorem/ExponentWithCRT.png">
 
-RSA WITH CRT
+It's messy, but the diagram shows that taking the exponent on the number and breaking it apart is the same as first breaking it apart and taking it to the exponent (the logic can be generalized to any positive whole number exponent, not just squaring).
+
+## 9. RSA With CRT
+
+The last section ended off by showing that CRT preserves exponents. So what if 
+we defined a function that took an ordered pair of numbers each to the 
+encrypting exponent? Take the following function E, the encrypting function.
 
 <img src="imgs/9. RSAwithCRT/EncryptionFunction.png">
 
+(NOTE: To encrypt like this you need the primes to break apart the numbers, which defeats the point of RSA, but this thought exercise helps us move into he decryption with CRT process. So real world encryption will stay the same as it was in basic RSA, but we are going to develop a better way to decrypt.)
+
+Now recall Eulers Theorem that stated:
+
 <img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+
+And remember that phi of a prime can be shown to be the prime minus 1.
 
 <img src="imgs/4. EulersTotient/Prime.png">
 
+Say e was greater than p - 1. Define the following.
+
 <img src="imgs/9. RSAwithCRT/e1.png">
+
+Putting this together, look at how we can reduce the size of an exponent mod p from e to our new exponent e1 by using Eulers Theorem.
 
 <img src="imgs/9. RSAwithCRT/ReducingExponent.png">
 
+Using all this, let's redefine our encryption function E to the following:
+
 <img src="imgs/9. RSAwithCRT/EncryptionFunctionReducedExponent.png">
+
+Encryption using CRT can then be shown using the following diagram (hypothetically of course, because this needs the primes it is a worthless algorithm, but decryption in CRT is the process of reversing this so it's here for the setup).
 
 <img src="imgs/9. RSAwithCRT/EncryptionAlgorithm.png">
 
+(NOTE: the arrow on the left is dotted because that is how the basic RSA algorithm would compute it. We don't actually compute that in CRT, but it's there to show that the end result with and without CRT is the same!)
+
+So the question of decrypting with CRT is the same as asking what the inverse is of our E function. But that just means we need exponents, d1 and d2, that ‘undo’ e1 and e2. Recognize that this is the same question as with basic RSA? We already proved the inverse of an encrypting exponent in mod phi of the modulo will give the decrypting exponent, so define the following:
+
 <img src="imgs/9. RSAwithCRT/DecryptionExponents.png">
+
+See now that our decryption function can be defined as follows:
 
 <img src="imgs/9. RSAwithCRT/DecryptionFunction.png">
 
+So the decryption algorithm using CRT can be shown in the diagram below. We 
+take our encrypted number h, pass it into the Delta function, pass the ordered
+pair into the decryption function, then pass that ordered pair into Delta 
+Inverse. This gives the same answer as though we had taken h to the basic 
+decryption exponent and reduced mod n.
+
 <img src="imgs/9. RSAwithCRT/DecryptionAlgorithm.png">
+
+So why would we want to use CRT to decrypt? Notice how we are operating in mod 
+p and mod q, with exponents smaller than p-1 and q-1? This makes each operation 
+significantly less costly, more than making up for the fact that we have to do 
+each computation twice!
+
+Now lets look at RSA with CRT over all. First let’s start with the setup, then we’ll look at the algorithm.
+
+The public key remains the same as we are not using CRT to encrypt, but the private key is quite a bit more complex, along with the process of creating it. Now lets look at the algorithm. Remember, r and s can be found at the same time by plugging p and q into the extended Euclidean algorithm!
 
 <img src="imgs/9. RSAwithCRT/KeyCreation.png">
 
+Now for the algorithm. The version on the left is the more verbose, the one on the right is the condensed version.
+
 <img src="imgs/9. RSAwithCRT/Algorithm.png">
+
+As complicated as it was to get here, the coding process is extremely simple, so lets look at some code.
