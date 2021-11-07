@@ -12,4 +12,4 @@ show where they come from later). The algorithm for encrypting and decrypting is
 follows, where k is the original number and h is the encrypted number.
 
 BASIC ALGORITHM
-<img src="https://github.com/TUdby/RSA-Educational/blob/master/imgs/1.%20BasicAlgorithm/BasicKeys.png>
+<img src="https://github.com/TUdby/RSA-Educational/blob/master/imgs/1.%20BasicAlgorithm/BasicKeys.png">
