@@ -26,7 +26,8 @@ shown below.
 A number k is encrypted by raising it to the power of e and reducing mod n to 
 get the encrypted number h. Then decryption is simply h to the power of d 
 reduced mod n. The following code snippet is a naive implementation this 
-algorithm.
+algorithm. This snippet assumes we have a function that gives us the keys,
+we will create this function later.
 
 <img src="imgs/CodeSnippets/Naive.PNG">
 
@@ -60,7 +61,7 @@ get 5 to the eighth. Continuing on we get 5 to the power of a number that is
 itself a power of two. Using this process, we fill in the following table. See 
 how this process is able to calculate very large exponents through only a 
 little multiplication? (Infact, we will never deal with any number larger than 
-the modulo number minus one sqaured.)
+the square of one less than the modulo number.)
 
 <img src="imgs/2. ModularExponentiation/PowersTable.png">
 
@@ -79,11 +80,15 @@ Plugging in our values we see that:
 This whole algorithm is called modular exponentiation. Here is a snippet of 
 code where we implement this algorithm. 
 
-SNIPPET
+<img src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
+
+<img src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
+
+<img src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
 
 And now we simply tweek the basic algorithm by introducing this function call.
 
-SNIPPET
+<img src="imgs/CodeSnippets/NaiveUpdated.PNG">
 
 ## 3. Basic Keys
 
@@ -180,6 +185,12 @@ And here is for primes:
 We have already used the semiprime form, and will later use the prime form. So 
 this is what the function "is", by why is it important? That is the topic of 
 the next section.
+
+A simple implementation of the Euclidean Algorithm would be as follows. We will
+not be using this, but will tweek it for the creation of the extended 
+algorithm.
+
+<img src="imgs/CodeSnippets/Euclidean.PNG">
 
 ## 5. Proving that the Basic Keys Work
 
@@ -427,10 +438,13 @@ seen in the previous slide.
 
 Now we are ready to put this into code. Take the following snippet:
 
-SNIPPET
+<img src="imgs/CodeSnippets/ExtendedPart1.PNG">
 
-explanation
+<img src="imgs/CodeSnippets/ExtendedPart2.PNG">
 
+And now we are ready to create our keys for basic RSA.
+
+<img src="imgs/CodeSnippets/KeyCreationBasic.PNG">
 
 ## 8. The Chinese Remainder Theorem
 
@@ -667,6 +681,11 @@ by plugging p and q into the extended Euclidean algorithm!
 
 <img src="imgs/9. RSAwithCRT/KeyCreation.png">
 
+Let's put this into code. Here is a key generating function for RSA encryption
+using the Chinese Remainder Theorem.
+
+<img src="imgs/CodeSnippets/KeyCreationCRT.PNG">
+
 Now for the algorithm. The version on the left is the more verbose, the one on 
 the right is the condensed version.
 
@@ -674,3 +693,5 @@ the right is the condensed version.
 
 As complicated as it was to get here, the coding process is extremely simple, 
 so lets look at some code.
+
+<img src="imgs/CodeSnippets/DecryptionCRT.PNG">
