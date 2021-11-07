@@ -301,7 +301,6 @@ Take the basic Euclidean algorithm example done on the left. Cut off the last eq
 left-hand side. You should get what you see on the right.
 
 <img src="imgs/7. ExtendedEuclidean/EuclideanExample.png">
-<img src="imgs/7. ExtendedEuclidean/ExtensionExample.png">
 
 Further altering the series of equations we got in the previous slide, on the right-hand 
 side explicitly give a coefficient of 1 in parenthesis for all numbers that don’t have 
