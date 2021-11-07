@@ -192,13 +192,48 @@ Theorem. This is why phi of n is central to RSA.
 
 <img src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
 
-EUCLIDEAN ALGORITHM
+## 6. The Euclidean Algorithm
+
+We talked about the Phi function, we showed that d will undo e, now we need to actually 
+compute the inverse of e mod phi of n. To do this we are going to use an algorithm known 
+as the Extended Euclidean Algorithm. Before we get to the extended part, lets first look 
+at just the basic Euclidean Algorithm.
+
+The Euclidean Algorithm is meant to find the Greatest Common Divisor (gcd) between two 
+numbers. If the gcd is 1, the two numbers are called relatively prime (also called 
+coprime). The process starts by dividing the larger number  by the smaller number and 
+finding the remainder.
+
+When dividing two numbers and finding a remainder, the process can be put in an 
+equation. The equation states that if you have a dividend being divided by a divisor, 
+then the dividend can be can be expressed as the divisor times the quotient, plus the 
+remainder.
 
 <img src="imgs/6. Euclidean Algorithm/DivisionEquation.png">
 
+For example, if we divide 1158 by 873, we get a quotient of 1 with a remainder of 285. 
+This can be written as:
+
 <img src="imgs/6. Euclidean Algorithm/DivisionEquationExample.png">
 
+Now say we had two numbers, a and b, where a is the larger of the two, and we wanted to 
+find their GCD. First, we set up the equation as we saw before. Then we set up another 
+division equation. This time we use the divisor of the previous equation as our 
+dividend, and the previous remainder as the new divisor, then we find the new quotient 
+and remainder. We repeat this process until we find a remainder of zero. The GCD is the 
+last non-zero remainder, 𝑟_𝑛.
+
 <img src="imgs/6. Euclidean Algorithm/SeriesOfDivisions.png">
+
+To see why the last non-zero remainder is the gcd, let’s first show that it is, in fact, 
+a divisor. Notice that the last equation in the diagram (on the previous slide) shows 
+that 𝑟_𝑛 divides 𝑟_(𝑛−1). Using this, look at the second to last equation. The right 
+side is made up of a multiple of 𝑟_𝑛 and a multiple of 𝑟_(𝑛−1) added together. Because 
+𝑟_𝑛 divides both of these, it therefore divides the whole right side of the equation, 
+which means it also divides the left side of the equation, which is just 𝑟_(𝑛−2). This 
+exact line of reasoning can be repeated for the next equation and then the next, 
+continuing until we find that 𝑟_𝑛 must divide a and b. Therefore, it is a common 
+divisor.
 
 <img src="imgs/6. Euclidean Algorithm/RewrittenEquation.png">
 
