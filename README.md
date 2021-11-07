@@ -15,174 +15,174 @@ BASIC ALGORITHM
 
 <img src="imgs/1. BasicAlgorithm/BasicKeys.png">
 
-<img src="BasicAlgorithm.png">
+<img src="imgs/1. BasicAlgorithm/BasicAlgorithm.png">
 
 MODULAR EXPONENTIATION
 
-<img src="BinaryExpansion.png">
+<img src="imgs/2. ModularExponentiation/BinaryExpansion.png">
 
-<img src="BinaryExponents.png">
+<img src="imgs/2. ModularExponentiation/BinaryExponents.png">
 
-<img src="PowersTable.png">
+<img src="imgs/2. ModularExponentiation/PowersTable.png">
 
-<img src="ImportantPowers1.png">
+<img src="imgs/2. ModularExponentiation/ImportantPowers1.png">
 
-<img src="ImportantPowers2.png">
+<img src="imgs/2. ModularExponentiation/ImportantPowers2.png">
 
-<img src="FinalAnswer.png">
+<img src="imgs/2. ModularExponentiation/FinalAnswer.png">
 
 BASIC KEYS
 
-<img src="KeyCreation.png">
+<img src="imgs/3. BasicKeys/KeyCreation.png">
 
 EULERS TOTIENT
 
-<img src="SemiPrime.png">
+<img src="imgs/4. EulersTotient/SemiPrime.png">
 
-<img src="Prime.png">
+<img src="imgs/4. EulersTotient/Prime.png">
 
-<img src="PrimeFactorizationExample.png">
+<img src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
 
-<img src="PrimeFactorizationGeneral.png">
+<img src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
 
-<img src="PhiFunction.png">
+<img src="imgs/4. EulersTotient/PhiFunction.png">
 
-<img src="DerivingSemiPrime.png">
+<img src="imgs/4. EulersTotient/DerivingSemiPrime.png">
 
-<img src="DerivingPrime.png">
+<img src="imgs/4. EulersTotient/DerivingPrime.png">
 
 PROVING BASIC KEYS
 
-<img src="EulersTheorem.png">
+<img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
 
-<img src="DivisibleByPhi.png">
+<img src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
 
-<img src="MultipleOfPhi.png">
+<img src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
 
-<img src="ProvingTheKeysUndo.png">
+<img src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
 
 EUCLIDEAN ALGORITHM
 
-<img src="DivisionEquation.png">
+<img src="imgs/6. Euclidean Algorithm/DivisionEquation.png">
 
-<img src="DivisionEquationExample.png">
+<img src="imgs/6. Euclidean Algorithm/DivisionEquationExample.png">
 
-<img src="SeriesOfDivisions.png">
+<img src="imgs/6. Euclidean Algorithm/SeriesOfDivisions.png">
 
-<img src="RewrittenEquation.png">
+<img src="imgs/6. Euclidean Algorithm/RewrittenEquation.png">
 
-<img src="EuclideanExample.png">
+<img src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
 
 EXTENDED EUCLIDEAN
 
-<img src="GCDEquation.png">
+<img src="imgs/7. ExtendedEuclidean/GCDEquation.png">
 
-<img src="PropertyOfGCDEquation.png">
+<img src="imgs/7. ExtendedEuclidean/PropertyOfGCDEquation.png">
 
-<img src="PropertyOfGCDEquation2.png">
+<img src="imgs/7. ExtendedEuclidean/PropertyOfGCDEquation2.png">
 
-<img src="InverseProperty.png">
+<img src="imgs/7. ExtendedEuclidean/InverseProperty.png">
 
-<img src="EuclideanExample.png">
+<img src="imgs/7. ExtendedEuclidean/EuclideanExample.png">
 
-<img src="ExtensionExample.png">
+<img src="imgs/7. ExtendedEuclidean/ExtensionExample.png">
 
-<img src="AlteredForm.png">
+<img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 
-<img src="ExampleFirstPart.png">
+<img src="imgs/7. ExtendedEuclidean/ExampleFirstPart.png">
 
-<img src="FirstPartProcess.PNG">
+<img src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
 
-<img src="NewSeries1.png">
+<img src="imgs/7. ExtendedEuclidean/NewSeries1.png">
 
-<img src="SecondPartProcess.png">
+<img src="imgs/7. ExtendedEuclidean/SecondPartProcess.png">
 
-<img src="FinalSeries.png">
+<img src="imgs/7. ExtendedEuclidean/FinalSeries.png">
 
-<img src="ThirdPartProcess.PNG">
+<img src="imgs/7. ExtendedEuclidean/ThirdPartProcess.PNG">
 
-<img src="ImportantParts.png">
+<img src="imgs/7. ExtendedEuclidean/ImportantParts.png">
 
-<img src="FirstLinearTransformation.png">
+<img src="imgs/7. ExtendedEuclidean/FirstLinearTransformation.png">
 
-<img src="AllTransformations.png">
+<img src="imgs/7. ExtendedEuclidean/AllTransformations.png">
 
-<img src="AlteredForm.png">
+<img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 
-<img src="GeneralTransformations.png">
+<img src="imgs/7. ExtendedEuclidean/GeneralTransformations.png">
 
-<img src="GCDEquationExample.png">
+<img src="imgs/7. ExtendedEuclidean/GCDEquationExample.png">
 
-<img src="DotProductForm.PNG">
+<img src="imgs/7. ExtendedEuclidean/DotProductForm.PNG">
 
 CHINESE REMAINDER THEOREM
 
-<img src="InitialQuestion.png">
+<img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
 
-<img src="QuestionExample.png">
+<img src="imgs/8. ChineseRemainderTheorem/QuestionExample.png">
 
-<img src="ExampleProcess1.png">
+<img src="imgs/8. ChineseRemainderTheorem/ExampleProcess1.png">
 
-<img src="ExampleProcess2.png">
+<img src="imgs/8. ChineseRemainderTheorem/ExampleProcess2.png">
 
-<img src="ExampleProcess3.png">
+<img src="imgs/8. ChineseRemainderTheorem/ExampleProcess3.png">
 
-<img src="ExampleAnswer.png">
+<img src="imgs/8. ChineseRemainderTheorem/ExampleAnswer.png">
 
-<img src="SlightGeneralQuestion.png">
+<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralQuestion.png">
 
-<img src="SlightGeneralProcess1.png">
+<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess1.png">
 
-<img src="SlightGeneralProcess2.png">
+<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess2.png">
 
-<img src="SlightGeneralProcess3.png">
+<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess3.png">
 
-<img src="SlightGeneralAnswer.png">
+<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralAnswer.png">
 
-<img src="InitialQuestion.png">
+<img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
 
-<img src="GeneralAnswer.png">
+<img src="imgs/8. ChineseRemainderTheorem/GeneralAnswer.png">
 
-<img src="PrimeInverses.png">
+<img src="imgs/8. ChineseRemainderTheorem/PrimeInverses.png">
 
-<img src="BreakAndBuildProcess.png">
+<img src="imgs/8. ChineseRemainderTheorem/BreakAndBuildProcess.png">
 
-<img src="Delta.png">
+<img src="imgs/8. ChineseRemainderTheorem/Delta.png">
 
-<img src="DeltaInverse.png">
+<img src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
 
-<img src="DeltaAndInverseIdentity.png">
+<img src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
 
-<img src="Integers.png">
+<img src="imgs/8. ChineseRemainderTheorem/Integers.png">
 
-<img src="DeltasMapping.png">
+<img src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
 
-<img src="MultiplicationRule.png">
+<img src="imgs/8. ChineseRemainderTheorem/MultiplicationRule.png">
 
-<img src="ExponentWithCRT.png">
+<img src="imgs/8. ChineseRemainderTheorem/ExponentWithCRT.png">
 
 RSA WITH CRT
 
-<img src="EncryptionFunction.png">
+<img src="imgs/9. RSAwithCRT/EncryptionFunction.png">
 
-<img src="EulersTheorem.png">
+<img src="imgs/9. RSAwithCRT/EulersTheorem.png">
 
-<img src="Prime.png">
+<img src="imgs/9. RSAwithCRT/Prime.png">
 
-<img src="e1.png">
+<img src="imgs/9. RSAwithCRT/e1.png">
 
-<img src="ReducingExponent.png">
+<img src="imgs/9. RSAwithCRT/ReducingExponent.png">
 
-<img src="EncryptionFunctionReducedExponent.png">
+<img src="imgs/9. RSAwithCRT/EncryptionFunctionReducedExponent.png">
 
-<img src="EncryptionAlgorithm.png">
+<img src="imgs/9. RSAwithCRT/EncryptionAlgorithm.png">
 
-<img src="DecryptionExponents.png">
+<img src="imgs/9. RSAwithCRT/DecryptionExponents.png">
 
-<img src="DecryptionFunction.png">
+<img src="imgs/9. RSAwithCRT/DecryptionFunction.png">
 
-<img src="DecryptionAlgorithm.png">
+<img src="imgs/9. RSAwithCRT/DecryptionAlgorithm.png">
 
-<img src="KeyCreation.png">
+<img src="imgs/9. RSAwithCRT/KeyCreation.png">
 
-<img src="Algorithm.png">
+<img src="imgs/9. RSAwithCRT/Algorithm.png">
