@@ -84,11 +84,11 @@ SNIPPET
 Now we need to set up the keys for basic RSA. The process is shown in the image below.
 The steps are this.
 
- -1. Choose two different prime numbers.
- -2. Multiply them together to get our number n, then use them to also find what is called phi of n (we will explain this in more detail later).
- -3. Choose an exponent e that is relatively prime to phi of n.
- -4. Find the inverse of e mod phi of n, this is our decryption exponent d (this is done using an algorithm called the Extended Euclidean Algorithm, we will go over this later).
- -5. Our keys are composed of e, d, and n.
+ 1. Choose two different prime numbers.
+ 2. Multiply them together to get our number n, then use them to also find what is called phi of n (we will explain this in more detail later).
+ 3. Choose an exponent e that is relatively prime to phi of n.
+ 4. Find the inverse of e mod phi of n, this is our decryption exponent d (this is done using an algorithm called the Extended Euclidean Algorithm, we will go over this later).
+ 5. Our keys are composed of e, d, and n.
 
 <img src="imgs/3. BasicKeys/KeyCreation.png">
 
@@ -98,34 +98,97 @@ While this is the process for creating the keys, it is not yet enough to underst
  - why e is 'undone' by d mod n
  - how the extended euclidean algorithm works and how it gives us our inverse
 
-After this, we will understand basic RSA and will look at some code. But before we move on to those sections, we need to under
+After this, we will understand basic RSA and will look at some code. But before we move
+on to those sections, we need to understand what the "trapdoor" is with RSA. By
+trapdoor, we mean the information that someone can encrypt without knowing, but must 
+know in order to decrypt. Thus, while we know the trapdoor because we are the ones who 
+created it, hackers need to search an obscenely large amount of time to find it. If 
+found, the trapdoor will let people into our encrypted messages.
+
+The trapdoor in RSA is the relationship between our primes, p and q, and the semiprime
+created by multiplying them together (n). It turns out that traditional computers and 
+algorithms struggle immensely in breaking a large semiprime into its primes.
+
+Notice that p and q are used to create phi of n. In turn, phi of n is used to create the 
+decryption exponent d. The way we use the primes to do this is not something that can be 
+extrapolated if we only know the semiprime. The encryption exponent uses the semiprime 
+to encrypt, but unless it is found out how to break the semiprime into its primes, the 
+decryption algorithm will not be found. This is the trapdoor of RSA.
 
 ## 4. Eulers Totient (The Phi Function)
 
 The Phi function is also called Eulers Totient. I bring that up so you will recognize 
-it by either name, but here I will call it the Phi function. 
+it by either name, but here I will call it the Phi function. The phi function confuses 
+some people because it appears to come in different forms. We saw that phi of our 
+semiprime was:
 
 <img src="imgs/4. EulersTotient/SemiPrime.png">
 
+But later, when we cover the Chinese Remainder Theorem, we will use the fact that phi of 
+a prime number is:
+
 <img src="imgs/4. EulersTotient/Prime.png">
+
+So what is the phi function and why does it seem to have different forms? These 
+“different forms” turn out to all be specific results from the same general form. The
+phi function is defined to answer the following question: if I input a number n, how
+many numbers smaller than n are relatively prime to n?
+
+Before we see the general function, remember that every number has a unique set of prime 
+factors. A certain unique prime factor may be multiplied more than once in the creation 
+of the number. To give an example of what I mean, take the number twelve:
 
 <img src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
 
+See that the prime factors of 12 are 3, 2, and 2. But two shows up twice so we can write 
+two to the power of 2. The unique prime factors are 3 and 2, and two shows up multiple 
+times as is shown by its exponent. This final form can be generalized to the prime 
+factorization of any number, and an be written as
+
 <img src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
+
+Where each p is a unique prime factor and each a is the amount the respective prime 
+factor shows up. Using this definition of the prime factorization of a natural number, 
+the general form of the phi function is as follows (m is used to mean the amount of 
+unique prime factors).
 
 <img src="imgs/4. EulersTotient/PhiFunction.png">
 
+Where this formula comes from is beyond our scope here. The reason I bring it up here is 
+so that we can derive the specific forms for semiprimes and for primes. Here is for 
+semiprimes:
+
 <img src="imgs/4. EulersTotient/DerivingSemiPrime.png">
+
+And here is for primes:
 
 <img src="imgs/4. EulersTotient/DerivingPrime.png">
 
-PROVING BASIC KEYS
+We have already used the semiprime form, and will later use the prime form. So this is 
+what the function "is", by why is it important? That is the topic of the next section.
+
+## 5. Proving that the Basic Keys Work
+
+In the algorithm for basic RSA, we see that the decryption exponent d undoes what the encryption exponent e does. Also, n the section on creating the keys we said that d must be the inverse of e within the context of mod phi of n. Now we need to show that if d
+is created in this manner, then it trully will 'undo' e.
+
+First, Euler proved a theorem that is now called Eulers Theorem. This theorem is as follow.
 
 <img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
 
+This states that any integer raised to the power of phi of n, then reduced mod n, will 
+equal 1 (the proof for this is omitted here, but can be found on youtube). To further set up our proof that d undoes e, look at the following. We take the definition of d, multiply e to both sides, then subtract the one across. 
+
 <img src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
 
+This says that ed-1 is 0 mod phi of n. That statment is equivalent to the statment that 
+there exists some number m where m times phi of n equals ed-1.
+
 <img src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
+
+With all of this set up, here is the proof. Notice that we use the previous equality to 
+swap out the exponent to be in terms of phi of n, then we take advantage of Eulers 
+Theorem. This is why phi of n is central to RSA.
 
 <img src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
 
