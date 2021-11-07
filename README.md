@@ -13,7 +13,7 @@ follows, where k is the original number and h is the encrypted number.
 
 BASIC ALGORITHM
 
-<img src="BasicKeys.png">
+<img src="imgs/1. BasicAlgorithm/BasicKeys.png">
 
 <img src="BasicAlgorithm.png">
 
