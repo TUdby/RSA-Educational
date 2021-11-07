@@ -165,9 +165,9 @@ RSA WITH CRT
 
 <img src="imgs/9. RSAwithCRT/EncryptionFunction.png">
 
-<img src="imgs/9. RSAwithCRT/EulersTheorem.png">
+<img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
 
-<img src="imgs/9. RSAwithCRT/Prime.png">
+<img src="imgs/4. EulersTotient/Prime.png">
 
 <img src="imgs/9. RSAwithCRT/e1.png">
 
