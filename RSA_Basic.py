@@ -5,7 +5,7 @@ def main():
     public_key ,private_key = generate_keys()
     print()
     print("Public Key: (e, n) = ", public_key)
-    print("Private Key: (p, q, d_1, d_2, delta_inverse) = ", private_key, "\n")
+    print("Private Key: (d, n) = ", private_key, "\n")
 
     # Get Message
     message = input("Message: ")
