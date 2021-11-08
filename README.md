@@ -76,7 +76,9 @@ key is the pair of d and n, where d is the decryption exponent. With these
 keys, the algorithm is
 shown below.
 
-<img src="imgs/1. BasicAlgorithm/BasicAlgorithm.png">
+<p align="center">
+ <img width="400" src="imgs/1. BasicAlgorithm/BasicAlgorithm.png">
+</p>
 
 A number k is encrypted by raising it to the power of e and reducing mod n to 
 get the encrypted number h. Then decryption is simply h to the power of d 
@@ -84,7 +86,9 @@ reduced mod n. The following code snippet is a naive implementation this
 algorithm. This snippet assumes we have a function that gives us the keys,
 we will create this function later.
 
-<img src="imgs/CodeSnippets/Naive.PNG">
+<p align="center">
+ <img width="300" src="imgs/CodeSnippets/Naive.PNG">
+</p>
 
 ## 2. Modular Exponentiation
 
@@ -97,14 +101,18 @@ To begin, every number can be broken into what is called its binary expansion.
 This is the sum of powers of two that add up to make the number (this process 
 is used to translate decimal numbers into binary). Take 67 as an example:
 
-<img src="imgs/2. ModularExponentiation/BinaryExpansion.png">
+<p align="center">
+ <img src="imgs/2. ModularExponentiation/BinaryExpansion.png">
+</p>
 
 Knowing our exponent rules, a number to an exponent times that same number to 
 another exponent is that number to the sum of the exponents. This fact can also 
 be used to break a number to an exponent into pieces. For example, take 5 to 
 the power of 67.
 
-<img src="imgs/2. ModularExponentiation/BinaryExponents.png">
+<p align="center">
+ <img src="imgs/2. ModularExponentiation/BinaryExponents.png">
+</p>
 
 Notice that we used this fact to break the exponent into its binary expansion.
 
@@ -118,32 +126,48 @@ how this process is able to calculate very large exponents through only a
 little multiplication? (Infact, we will never deal with any number larger than 
 the square of one less than the modulo number.)
 
-<img src="imgs/2. ModularExponentiation/PowersTable.png">
+<p align="center">
+ <img src="imgs/2. ModularExponentiation/PowersTable.png">
+</p>
 
 Using this table we see that:
 
-<img src="imgs/2. ModularExponentiation/ImportantPowers1.png">
+<p align="center">
+ <img src="imgs/2. ModularExponentiation/ImportantPowers1.png">
+</p>
 
 We also know that:
 
-<img src="imgs/2. ModularExponentiation/ImportantPowers2.png">
+<p align="center">
+ <img src="imgs/2. ModularExponentiation/ImportantPowers2.png">
+</p>
 
 Plugging in our values we see that:
 
-<img src="imgs/2. ModularExponentiation/FinalAnswer.png">
+<p align="center">
+ <img src="imgs/2. ModularExponentiation/FinalAnswer.png">
+</p>
 
 This whole algorithm is called modular exponentiation. Here is a snippet of 
 code where we implement this algorithm. 
 
-<img src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
+</p>
 
-<img src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
+</p>
 
-<img src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
+</p>
 
 And now we simply tweek the basic algorithm by introducing this function call.
 
-<img src="imgs/CodeSnippets/NaiveUpdated.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/NaiveUpdated.PNG">
+</p>
 
 ## 3. Basic Keys
 
@@ -157,7 +181,9 @@ below. The steps are this.
  5. Find the inverse of e mod phi of n, this is our decryption exponent d
  6. Our keys are composed of e, d, and n.
 
-<img src="imgs/3. BasicKeys/KeyCreation.png">
+<p align="center">
+ <img src="imgs/3. BasicKeys/KeyCreation.png">
+</p>
 
 While this is the process for creating the keys, it is not yet enough to 
 understand what is going on or how to code it. In the next few sections we will 
@@ -194,12 +220,16 @@ recognize it by either name, but here I will call it the Phi function. The phi
 function confuses some people because it appears to come in different forms. We 
 saw that phi of our semiprime was:
 
-<img src="imgs/4. EulersTotient/SemiPrime.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/SemiPrime.png">
+</p>
 
 But later, when we cover the Chinese Remainder Theorem, we will use the fact 
 that phi of a prime number is:
 
-<img src="imgs/4. EulersTotient/Prime.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/Prime.png">
+</p>
 
 So what is the phi function and why does it seem to have different forms? These 
 “different forms” turn out to all be specific results from the same general 
@@ -211,31 +241,41 @@ of prime factors. A certain unique prime factor may be multiplied more than
 once in the creation of the number. To give an example of what I mean, take the 
 number twelve:
 
-<img src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
+</p>
 
 See that the prime factors of 12 are 3, 2, and 2. But two shows up twice so we 
 can write two to the power of 2. The unique prime factors are 3 and 2, and two 
 shows up multiple times as is shown by its exponent. This final form can be 
 generalized to the prime factorization of any number, and an be written as
 
-<img src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
+</p>
 
 Where each p is a unique prime factor and each a is the amount the respective 
 prime factor shows up. Using this definition of the prime factorization of a 
 natural number, the general form of the phi function is as follows (m is used 
 to mean the amount of unique prime factors).
 
-<img src="imgs/4. EulersTotient/PhiFunction.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/PhiFunction.png">
+</p>
 
 Where this formula comes from is beyond our scope here. The reason I bring it 
 up here is so that we can derive the specific forms for semiprimes and for 
 primes. Here is for semiprimes:
 
-<img src="imgs/4. EulersTotient/DerivingSemiPrime.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/DerivingSemiPrime.png">
+</p>
 
 And here is for primes:
 
-<img src="imgs/4. EulersTotient/DerivingPrime.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/DerivingPrime.png">
+</p>
 
 We have already used the semiprime form, and will later use the prime form. So 
 this is what the function "is", by why is it important? That is the topic of 
@@ -245,7 +285,9 @@ A simple implementation of the Euclidean Algorithm would be as follows. We will
 not be using this, but will tweek it for the creation of the extended 
 algorithm.
 
-<img src="imgs/CodeSnippets/Euclidean.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/Euclidean.PNG">
+</p>
 
 ## 5. Proving that the Basic Keys Work
 
@@ -258,7 +300,9 @@ e.
 First, Euler proved a theorem that is now called Eulers Theorem. This theorem 
 is as follow.
 
-<img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+<p align="center">
+ <img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+</p>
 
 This states that any integer raised to the power of phi of n, then reduced mod 
 n, will equal 1 (the proof for this is omitted here, but can be found on 
@@ -266,18 +310,24 @@ youtube). To further set up our proof that d undoes e, look at the following.
 We take the definition of d, multiply e to both sides, then subtract the one 
 across. 
 
-<img src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
+<p align="center">
+ <img src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
+</p>
 
 This says that ed-1 is 0 mod phi of n. That statment is equivalent to the 
 statment that there exists some number m where m times phi of n equals ed-1.
 
-<img src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
+<p align="center">
+ <img src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
+</p>
 
 With all of this set up, here is the proof. Notice that we use the previous 
 equality to swap out the exponent to be in terms of phi of n, then we take 
 advantage of Eulers Theorem. This is why phi of n is central to RSA.
 
-<img src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
+<p align="center">
+ <img src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
+</p>
 
 ## 6. The Euclidean Algorithm
 
