@@ -253,14 +253,14 @@ function confuses some people because it appears to come in different forms. We
 saw that phi of our semiprime was:
 
 <p align="center">
- <img height="30" src="imgs/4. EulersTotient/SemiPrime.png">
+ <img height="35" src="imgs/4. EulersTotient/SemiPrime.png">
 </p>
 
 But later, when we cover the Chinese Remainder Theorem, we will use the fact 
 that phi of a prime number is:
 
 <p align="center">
- <img src="imgs/4. EulersTotient/Prime.png">
+ <img height="35" src="imgs/4. EulersTotient/Prime.png">
 </p>
 
 So what is the phi function and why does it seem to have different forms? These 
@@ -279,7 +279,7 @@ once in the creation of the number. To give an example of what I mean, take the
 number twelve:
 
 <p align="center">
- <img src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
+ <img height="35" src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
 </p>
 
 See that the prime factors of 12 are 3, 2, and 2. But two shows up twice so we 
@@ -288,7 +288,7 @@ shows up multiple times as is shown by its exponent. This final form can be
 generalized to the prime factorization of any number, and can be written as
 
 <p align="center">
- <img src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
+ <img height="35" src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
 </p>
 
 where each _p_ is a unique prime factor and each _a_ is the amount the respective 
@@ -298,7 +298,7 @@ to mean the amount of unique prime factors, the same m used in the prime
 factorization above).
 
 <p align="center">
- <img src="imgs/4. EulersTotient/PhiFunction.png">
+ <img height="35" src="imgs/4. EulersTotient/PhiFunction.png">
 </p>
 
 Where this formula comes from is beyond our scope here (there are good videos
@@ -306,13 +306,13 @@ on it on youtube). But let's use it to derive the specific forms for semiprimes
 and for primes. Here is for semiprimes:
 
 <p align="center">
- <img src="imgs/4. EulersTotient/DerivingSemiPrime.png">
+ <img height="35" src="imgs/4. EulersTotient/DerivingSemiPrime.png">
 </p>
 
 And here is for primes:
 
 <p align="center">
- <img src="imgs/4. EulersTotient/DerivingPrime.png">
+ <img height="35" src="imgs/4. EulersTotient/DerivingPrime.png">
 </p>
 
 This section was to help explain the phi function, now we'll see its importance.
