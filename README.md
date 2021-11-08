@@ -1,12 +1,48 @@
 # RSA-Educational
 The readme walks through RSA and the building of the example code provided.
 
+## Overview / TOC
 
+RSA encryption is an asymmetric encryption algorithm, meaning it has a public
+used to encrypt and a private key used to decrypt. Now the RSA algorithm can
+be enhanced by something called the Chinese Remainder Theorem. We will 
+go over that, but first we will go over basic RSA without it. While talking on 
+RSA, we go over code snippits when appropriate and build up to the example code 
+that we have provided. In going over RSA, the sections and the topics they 
+cover are:
 
+ 1. The Basic Algorithm
+Given the keys, how do we encyrpt and decrypt? In this section we do not
+yet build the key as that requires more math that we cover in later sections.
+ 2. Modular Exponentiation
+An algorithm for implementing the mathematics in the previous section. Without
+it, the computer could not execute the process required to use the keys.
+ 3. Basic Keys
+This section outlines the steps in creating the keys; however, more mathematics
+is necessary to implement this process and will be covered oer the next few 
+sections.
+ 4. Eulers Totient (The Phi Function)
+A function that is important in number theory and essential to RSA. We go over
+it in sufficient detail to remove confusion about what it is and the different
+forms it shos up in.
+ 5. Proving the Basic Keys Work
+The previous section allows this section to show why the keys work the way we
+need them to. We still do show how to create them yet.
+ 6. The Euclidean Algorithm
+The Euclidean Algorithm is necessary to understand the Extended Euclidean
+Algorithm.
+ 7. The Extended Euclidean Algorithm
+This algorithm is how we find inverses of integers in modular arithmetic, 
+and is what allows us to actually create our keys.
+ 8. The Chinese Remainder Theorem
+This theorem is not essential for RSA, but allows the implementation of 
+decryption to be made more efficent. This section goes over the theorem in
+general, laying the groundwork for the next section.
+ 9. RSA using the Chinese Remainder Theorem
+In this section we bring together CRT and everything else we have learned to
+make a surprisingly elegent and efficient algorithm for RSA encryption.
 
 ## 1. The Basic Algorithm
-RSA can be enhanced by something called the Chinese Remainder Theorem. We will 
-go over that, but first we will go over basic RSA without it.
 
 Assume we have a private key "Priv" and a public key "Pub" as shown below (we 
 will show where they come from later). The algorithm for encrypting and 
