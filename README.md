@@ -1,27 +1,85 @@
-# RSA-Educational
-The readme walks through RSA and the building of the example code provided.
+# RSA Educational
+The readme walks through RSA and the building of the example code provided. The
+code is made using python.
 
+If anyone more knowledgable finds any mistake do let me know so
+I can fix it. Thank you, and I hope this is helpful!
 
+## Overview / TOC
 
+RSA encryption is an asymmetric encryption algorithm, meaning it has a public
+used to encrypt and a private key used to decrypt. Now the RSA algorithm can
+be enhanced by something called the Chinese Remainder Theorem. We will 
+go over that, but first we will go over basic RSA without it. While talking on 
+RSA, we go over code snippits when appropriate and build up to the example code 
+that we have provided. In going over RSA, the sections and the topics they 
+cover are:
+
+ 1. The Basic Algorithm
+
+Given the keys, how do we encyrpt and decrypt? In this section we do not
+yet build the key as that requires more math that we cover in later sections.
+
+ 2. Modular Exponentiation
+
+An algorithm for implementing the mathematics in the previous section. Without
+it, the computer could not execute the process required to use the keys.
+
+ 3. Basic Keys
+
+This section outlines the steps in creating the keys; however, more mathematics
+is necessary to implement this process and will be covered oer the next few 
+sections.
+
+ 4. Eulers Totient (The Phi Function)
+
+A function that is important in number theory and essential to RSA. We go over
+it in sufficient detail to remove confusion about what it is and the different
+forms it shos up in.
+
+ 5. Proving the Basic Keys Work
+
+The previous section allows this section to show why the keys work the way we
+need them to. We still do show how to create them yet.
+
+ 6. The Euclidean Algorithm
+
+The Euclidean Algorithm is necessary to understand the Extended Euclidean
+Algorithm.
+
+ 7. The Extended Euclidean Algorithm
+
+This algorithm is how we find inverses of integers in modular arithmetic, 
+and is what allows us to actually create our keys.
+
+ 8. The Chinese Remainder Theorem
+
+This theorem is not essential for RSA, but allows the implementation of 
+decryption to be made more efficent. This section goes over the theorem in
+general, laying the groundwork for the next section.
+
+ 9. RSA using the Chinese Remainder Theorem
+
+In this section we bring together CRT and everything else we have learned to
+make a surprisingly elegent and efficient algorithm for RSA encryption.
 
 ## 1. The Basic Algorithm
-RSA can be enhanced by something called the Chinese Remainder Theorem. We will 
-go over that, but first we will go over basic RSA without it.
 
-Assume we have a private key "Priv" and a public key "Pub" as shown below (we 
-will show where they come from later). The algorithm for encrypting and 
-decrypting is as follows, where k is the original number and h is the encrypted 
-number.
-
-<img src="imgs/1. BasicAlgorithm/BasicKeys.png">
-
+Assume we have a private key "Priv" and a public key "Pub" as shown below. 
 The public key is the ordered pair of a number e and a number n. The number e 
 is the encryption exponent, and n is our modulo number. Likewise, the private 
-key is the pair of d and n, where d is the decryption exponent. With these 
-keys, the algorithm is
-shown below.
+key is the pair of d and n, where d is the decryption exponent.
 
-<img src="imgs/1. BasicAlgorithm/BasicAlgorithm.png">
+<p align="center">
+ <img width="125" src="imgs/1. BasicAlgorithm/BasicKeys.png">
+</p>
+
+With these keys, the algorithm for encrypting and decrypting is as follows, 
+where k is the original number and h is the encrypted number.
+
+<p align="center">
+ <img width="400" src="imgs/1. BasicAlgorithm/BasicAlgorithm.png">
+</p>
 
 A number k is encrypted by raising it to the power of e and reducing mod n to 
 get the encrypted number h. Then decryption is simply h to the power of d 
@@ -29,11 +87,13 @@ reduced mod n. The following code snippet is a naive implementation this
 algorithm. This snippet assumes we have a function that gives us the keys,
 we will create this function later.
 
-<img src="imgs/CodeSnippets/Naive.PNG">
+<p align="center">
+ <img width="300" src="imgs/CodeSnippets/Naive.PNG">
+</p>
 
 ## 2. Modular Exponentiation
 
-The problem with that implementation is that, even for very small exponents, 
+The problem with that code snippet is that, even for very small exponents, 
 the number k taken to e and the number h taken to d will both be far too large 
 for the computer to handle efficiently. So to really implement the basic RSA 
 algorithm we need to look at another algorithm called modular exponentiation.
@@ -42,53 +102,106 @@ To begin, every number can be broken into what is called its binary expansion.
 This is the sum of powers of two that add up to make the number (this process 
 is used to translate decimal numbers into binary). Take 67 as an example:
 
-<img src="imgs/2. ModularExponentiation/BinaryExpansion.png">
+<p align="center">
+ <img width="300" src="imgs/2. ModularExponentiation/BinaryExpansion.png">
+</p>
 
 Knowing our exponent rules, a number to an exponent times that same number to 
 another exponent is that number to the sum of the exponents. This fact can also 
-be used to break a number to an exponent into pieces. For example, take 5 to 
+be used to break a number with an exponent into pieces. For example, take 5 to 
 the power of 67.
 
-<img src="imgs/2. ModularExponentiation/BinaryExponents.png">
+<p align="center">
+ <img width="175" src="imgs/2. ModularExponentiation/BinaryExponents.png">
+</p>
 
 Notice that we used this fact to break the exponent into its binary expansion.
 
-Now say we wanted to take 5 to the power of 67 and reduce it mod 29. 5 is 5 to 
-the first power. If we square it we get five squared. When this is reduced mod 
-21 we find that 5 squared is congruent to 4 mod 29. If we squared 4, this is 
-the same as squareing 5 squared, which is 5 to the fourth. Squared again and we 
-get 5 to the eighth. Continuing on we get 5 to the power of a number that is 
-itself a power of two. Using this process, we fill in the following table. See 
-how this process is able to calculate very large exponents through only a 
-little multiplication? (Infact, we will never deal with any number larger than 
-the square of one less than the modulo number.)
+Now say we wanted to take 5 to the power of 67 and reduce it mod 29. Below is
+a table. The first row is the exponent in terms of powers of two. The second
+row is the exponent, and the third row is 5 taken to the power in its column
+reduced by 29. To understand how we fill it out, start with the first column 
+(the first one with numbers, that is). Obviously, 5 is 5 to the first power. 
+If we square it we get five squared. When this is reduced mod 21 we find that 
+5 squared is congruent to 4 mod 29. If we squared 4, this is the same as
+squaring 5 squared, which is 5 to the fourth. We reduce it and the number we 
+are working with remains small, despite the exponent getting rather large. 
+Squared again and we get 5 to the eighth. We continue this process to fill out 
+the table. See how this process is able to calculate very large exponents 
+through only a little multiplication and relatively small numbers? (Infact, 
+we will never deal with any number larger than the square of one less than
+the modulo number.)
 
-<img src="imgs/2. ModularExponentiation/PowersTable.png">
+<p align="center">
+ <img width="500" src="imgs/2. ModularExponentiation/PowersTable.png">
+</p>
 
 Using this table we see that:
 
-<img src="imgs/2. ModularExponentiation/ImportantPowers1.png">
+<p align="center">
+ <img width="250" src="imgs/2. ModularExponentiation/ImportantPowers1.png">
+</p>
 
 We also know that:
 
-<img src="imgs/2. ModularExponentiation/ImportantPowers2.png">
+<p align="center">
+ <img width="150" src="imgs/2. ModularExponentiation/ImportantPowers2.png">
+</p>
 
 Plugging in our values we see that:
 
-<img src="imgs/2. ModularExponentiation/FinalAnswer.png">
+<p align="center">
+ <img width="350" src="imgs/2. ModularExponentiation/FinalAnswer.png">
+</p>
 
-This whole algorithm is called modular exponentiation. Here is a snippet of 
-code where we implement this algorithm. 
+This also tells us how large the table needs to be. We continue the 
+exponentiation process until we have calculated the largest power in the
+binary expansion.
 
-<img src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
+This whole algorithm is called modular exponentiation. Here are snippets of 
+code where we implement this algorithm. First look at the following snippet.
+There are two parts to this snippet. First we find the largest power of
+two that is less than our exponent. Recall that this is the largest number
+of the table that we wish to create. The second part is where we create 
+the binary expansion. We do this by subtracting the current exponent by the
+largest power of two that is smaller than it, logging that power in the array,
+then finding the next power of two that is the largest power smaller than the
+new exponent. Continuing this process we find every power of two. (NOTE: for
+the sake of avoiding confusion, that storing the number of 13 means we are
+storing is referring to 2^13. The reason we only store the exponent of two, 
+which is itself the exponent of k, is based on the following observation. Look
+at the this exponent on the first row of our table and see that it starts at
+zero and increments by one. This zero based indexing allows us to use it to
+refer to the index of the array that will store the third row. It also tells
+us how many times the number was squared.)
 
-<img src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
+<p align="center">
+ <img width="500" src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
+</p>
 
-<img src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
+In this second snippet, we create an array that corresponds to the third row
+of our table. We start with k, then square and reduce to find the next number.
+Observe that the largest power was stored into the zeroth index of our binary
+expansion, and it tells us how many times the largest index of the array that
+stores the third row.
+
+<p align="center">
+ <img width="500" src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
+</p>
+
+In this third and final snippet we use the powers in the binary expansion as
+the indices of the third row that need to be multiplied together. We do the
+multiplication, reduce by our modulo number, and return the answer.
+
+<p align="center">
+ <img width="500" src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
+</p>
 
 And now we simply tweek the basic algorithm by introducing this function call.
 
-<img src="imgs/CodeSnippets/NaiveUpdated.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/NaiveUpdated.PNG">
+</p>
 
 ## 3. Basic Keys
 
@@ -96,40 +209,44 @@ Now we need to set up the keys for basic RSA. The process is shown in the image
 below. The steps are this.
 
  1. Choose two different prime numbers.
- 2. Multiply them together to get our number n
- 3. then use them to also find phi of n (more on this next section).
+ 2. Multiply them together to get our number n.
+ 3. Use them to also find phi of n (more on this next section).
  4. Choose an exponent e that is relatively prime to phi of n.
- 5. Find the inverse of e mod phi of n, this is our decryption exponent d
+ 5. Find the inverse of e mod phi of n, this is our decryption exponent d.
  6. Our keys are composed of e, d, and n.
 
-<img src="imgs/3. BasicKeys/KeyCreation.png">
+<p align="center">
+ <img src="imgs/3. BasicKeys/KeyCreation.png">
+</p>
 
 While this is the process for creating the keys, it is not yet enough to 
 understand what is going on or how to code it. In the next few sections we will 
 cover:
 
- - what the phi function is
- - why e is 'undone' by d mod n
- - how the extended euclidean algorithm works and how it gives us our inverse
+ - What the phi function is.
+ - Why e is 'undone' by d mod n.
+ - How the extended euclidean algorithm works and is used to give us inverses in 
+modular arithmetic.
 
 After this, we will understand basic RSA and will look at some code. But before 
 we move on to those sections, we need to understand what the "trapdoor" is with 
 RSA. By trapdoor, we mean the information that someone can encrypt without 
-knowing, but must know in order to decrypt. Thus, while we know the trapdoor 
-because we are the ones who created it, hackers need to search an obscenely 
-large amount of time to find it. If found, the trapdoor will let people into 
+knowing, but must know in order to decrypt. While we know the trapdoor because 
+we are the ones who created it, hackers need to search an obscenely large 
+amount of time to find it. If found, the trapdoor will let people into 
 our encrypted messages.
 
 The trapdoor in RSA is the relationship between our primes, p and q, and the 
-semiprime created by multiplying them together (n). It turns out that 
+semiprime created by multiplying them together, n. It turns out that 
 traditional computers and algorithms struggle immensely in breaking a large 
 semiprime into its primes.
 
 Notice that p and q are used to create phi of n. In turn, phi of n is used to 
-create the decryption exponent d. The way we use the primes to do this is not 
-something that can be extrapolated if we only know the semiprime. The 
-encryption exponent uses the semiprime to encrypt, but unless it is found out 
-how to break the semiprime into its primes, the decryption algorithm will not 
+create the decryption exponent d. However, the only connection to our primes
+that is made public is our semiprime n. Hackers need figure out how to efficiently
+break a large semiprime into the primes in order to find phi of n, and with it, 
+d. The encryption exponent uses the semiprime to encrypt, but unless it is found 
+out how to break the semiprime into its primes, the decryption algorithm will not 
 be found. This is the trapdoor of RSA.
 
 ## 4. Eulers Totient (The Phi Function)
@@ -139,71 +256,85 @@ recognize it by either name, but here I will call it the Phi function. The phi
 function confuses some people because it appears to come in different forms. We 
 saw that phi of our semiprime was:
 
-<img src="imgs/4. EulersTotient/SemiPrime.png">
+<p align="center">
+ <img height="35" src="imgs/4. EulersTotient/SemiPrime.png">
+</p>
 
 But later, when we cover the Chinese Remainder Theorem, we will use the fact 
 that phi of a prime number is:
 
-<img src="imgs/4. EulersTotient/Prime.png">
+<p align="center">
+ <img height="35" src="imgs/4. EulersTotient/Prime.png">
+</p>
 
 So what is the phi function and why does it seem to have different forms? These 
 “different forms” turn out to all be specific results from the same general 
 form. The phi function is defined to answer the following question: if I input 
-a number n, how many numbers smaller than n are relatively prime to n?
+a number n, how many numbers smaller than n are relatively prime to n? That's
+why it was made, but we won't be referencing that anymore, I simply bring it
+up to demistify the function. The significance of phi comes from a theorem name 
+Eulers Theorem that we will cover in the next section. For the rest of the this
+section, I will show the general form, and show how it derives the specific forms 
+we will be using.
 
 Before we see the general function, remember that every number has a unique set 
 of prime factors. A certain unique prime factor may be multiplied more than 
 once in the creation of the number. To give an example of what I mean, take the 
 number twelve:
 
-<img src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
+<p align="center">
+ <img height="35" src="imgs/4. EulersTotient/PrimeFactorizationExample.png">
+</p>
 
 See that the prime factors of 12 are 3, 2, and 2. But two shows up twice so we 
 can write two to the power of 2. The unique prime factors are 3 and 2, and two 
 shows up multiple times as is shown by its exponent. This final form can be 
-generalized to the prime factorization of any number, and an be written as
+generalized to the prime factorization of any number, and can be written as
 
-<img src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
+<p align="center">
+ <img height="35" src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
+</p>
 
-Where each p is a unique prime factor and each a is the amount the respective 
+where each _p_ is a unique prime factor and each _a_ is the amount the respective 
 prime factor shows up. Using this definition of the prime factorization of a 
 natural number, the general form of the phi function is as follows (m is used 
-to mean the amount of unique prime factors).
+to mean the amount of unique prime factors, the same m used in the prime
+factorization above).
 
-<img src="imgs/4. EulersTotient/PhiFunction.png">
+<p align="center">
+ <img height="35" src="imgs/4. EulersTotient/PhiFunction.png">
+</p>
 
-Where this formula comes from is beyond our scope here. The reason I bring it 
-up here is so that we can derive the specific forms for semiprimes and for 
-primes. Here is for semiprimes:
+Where this formula comes from is beyond our scope here (there are good videos
+on it on youtube). But let's use it to derive the specific forms for semiprimes 
+and for primes. Here is for semiprimes:
 
-<img src="imgs/4. EulersTotient/DerivingSemiPrime.png">
+<p align="center">
+ <img height="35" src="imgs/4. EulersTotient/DerivingSemiPrime.png">
+</p>
 
 And here is for primes:
 
-<img src="imgs/4. EulersTotient/DerivingPrime.png">
+<p align="center">
+ <img height="35" src="imgs/4. EulersTotient/DerivingPrime.png">
+</p>
 
-We have already used the semiprime form, and will later use the prime form. So 
-this is what the function "is", by why is it important? That is the topic of 
-the next section.
-
-A simple implementation of the Euclidean Algorithm would be as follows. We will
-not be using this, but will tweek it for the creation of the extended 
-algorithm.
-
-<img src="imgs/CodeSnippets/Euclidean.PNG">
+This section was to help explain the phi function, now we'll see its importance.
 
 ## 5. Proving that the Basic Keys Work
 
 In the algorithm for basic RSA, we see that the decryption exponent d undoes 
-what the encryption exponent e does. Also, n the section on creating the keys 
+what the encryption exponent e does. Also, in the section on creating the keys 
 we said that d must be the inverse of e within the context of mod phi of n. Now 
 we need to show that if d is created in this manner, then it trully will 'undo' 
 e.
 
 First, Euler proved a theorem that is now called Eulers Theorem. This theorem 
-is as follow.
+is as follows.
 
-<img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+<p align="center">
+ <img height="35" src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+</p>
 
 This states that any integer raised to the power of phi of n, then reduced mod 
 n, will equal 1 (the proof for this is omitted here, but can be found on 
@@ -211,18 +342,24 @@ youtube). To further set up our proof that d undoes e, look at the following.
 We take the definition of d, multiply e to both sides, then subtract the one 
 across. 
 
-<img src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
+<p align="center">
+ <img height="100" src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
+</p>
 
 This says that ed-1 is 0 mod phi of n. That statment is equivalent to the 
 statment that there exists some number m where m times phi of n equals ed-1.
 
-<img src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
+<p align="center">
+ <img height="70" src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
+</p>
 
 With all of this set up, here is the proof. Notice that we use the previous 
 equality to swap out the exponent to be in terms of phi of n, then we take 
 advantage of Eulers Theorem. This is why phi of n is central to RSA.
 
-<img src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
+<p align="center">
+ <img width="500" src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
+</p>
 
 ## 6. The Euclidean Algorithm
 
@@ -233,45 +370,54 @@ extended part, lets first look at just the basic Euclidean Algorithm.
 
 The Euclidean Algorithm is meant to find the Greatest Common Divisor (gcd) 
 between two numbers. If the gcd is 1, the two numbers are called relatively 
-prime (also called coprime). The process starts by dividing the larger number  
+prime (also called coprime). The algorithm starts by dividing the larger number  
 by the smaller number and finding the remainder.
 
-When dividing two numbers and finding a remainder, the process can be put in an 
-equation. The equation states that if you have a dividend being divided by a 
-divisor, then the dividend can be can be expressed as the divisor times the 
-quotient, plus the remainder.
+When dividing two numbers and finding a remainder, the we can put the division 
+into an equation. The equation states that if you have a dividend being 
+divided by a divisor, then the dividend can be can be expressed as the divisor 
+times the quotient, plus the remainder.
 
-<img src="imgs/6. Euclidean Algorithm/DivisionEquation.png">
+<p align="center">
+<img height="35" src="imgs/6. Euclidean Algorithm/DivisionEquation.png">
+</p>
 
 For example, if we divide 1158 by 873, we get a quotient of 1 with a remainder 
 of 285. This can be written as:
 
-<img src="imgs/6. Euclidean Algorithm/DivisionEquationExample.png">
+<p align="center">
+<img height="35" src="imgs/6. Euclidean Algorithm/DivisionEquationExample.png">
+</p>
 
 Now say we had two numbers, a and b, where a is the larger of the two, and we 
-wanted to find their GCD. First, we set up the equation as we saw before. Then 
-we set up another division equation. This time we use the divisor of the 
-previous equation as our dividend, and the previous remainder as the new 
+wanted to find their GCD. First, we set up the division equation that we just 
+saw. Then we set up a second division equation. This time we use the divisor 
+of the previous equation as our dividend, and the previous remainder as the new 
 divisor, then we find the new quotient and remainder. We repeat this process 
 until we find a remainder of zero. The GCD is the last non-zero remainder, 𝑟_𝑛.
 
-<img src="imgs/6. Euclidean Algorithm/SeriesOfDivisions.png">
+<p align="center">
+<img width="300" src="imgs/6. Euclidean Algorithm/SeriesOfDivisions.png">
+</p>
 
 To see why the last non-zero remainder is the gcd, let’s first show that it is, 
-in fact, a divisor. Notice that the last equation in the diagram (on the 
-previous slide) shows that 𝑟_𝑛 divides 𝑟_(𝑛−1). Using this, look at the second 
-to last equation. The right side is made up of a multiple of 𝑟_𝑛 and a multiple 
-of 𝑟_(𝑛−1) added together. Because 𝑟_𝑛 divides both of these, it therefore 
-divides the whole right side of the equation, which means it also divides the 
-left side of the equation, which is just 𝑟_(𝑛−2). This exact line of reasoning 
-can be repeated for the next equation and then the next, continuing until we 
-find that 𝑟_𝑛 must divide a and b. Therefore, it is a common divisor.
+in fact, a divisor. Notice that the last equation in the previous diagram shows
+that 𝑟_𝑛 divides 𝑟_(𝑛−1) (because 𝑟_(𝑛−1) is equal to 𝑟_𝑛 multiplied by some 
+integer). Using this, look at the second to last equation. The right side is 
+made up of a multiple of 𝑟_𝑛 and a multiple of 𝑟_(𝑛−1) added together. Because 
+𝑟_𝑛 divides both of these, it therefore divides the whole right side of the 
+equation, which means it also divides the left side of the equation, which is 
+just 𝑟_(𝑛−2). This exact line of reasoning can be repeated for the next 
+equation and then the next, continuing until we find that 𝑟_𝑛 must divide _a_ 
+and _b_. Therefore, it is a common divisor.
 
-But is it the greatest common divisor? Say we have another divisor, d. Looking 
+But is it the _greatest_ common divisor? Say we have another divisor, d. Looking 
 at the first equation, say we subtract 𝑏(𝑞_1) across to the other side. The 
 equation we get is:
 
-<img src="imgs/6. Euclidean Algorithm/RewrittenEquation.png">
+<p align="center">
+<img height="35" src="imgs/6. Euclidean Algorithm/RewrittenEquation.png">
+</p>
 
 Because d divides both a and b (because we assumed it was another common 
 divisor), it must divide the left side and therefore also the right side, which 
@@ -284,7 +430,17 @@ arbitrary divisor. This shows it is the GCD.
 Here is a quick example of using the Euclidean Algorithm to find that gcd⁡(1158, 
 873)=3
 
-<img src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
+<p align="center">
+<img width="300" src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
+</p>
+
+A simple implementation of the Euclidean Algorithm would be as follows. We will
+not be using this directly, but will tweek it for the creation of the extended 
+algorithm.
+
+<p align="center">
+ <img src="imgs/CodeSnippets/Euclidean.PNG">
+</p>
 
 ## 7. The Extended Euclidean Algorithm
 
@@ -292,19 +448,11 @@ That was a thorough enough treatment on the basic Euclidean Algorithm, now for
 the extension. Say d is the gcd of a and b. There exists an r and an s such 
 that:
 
+<p align="center">
 <img src="imgs/7. ExtendedEuclidean/GCDEquation.png">
+</p>
 
-The extension is about finding this equation (or rather, the extension is what 
-found the existence of this equation, and once the importance of this equation 
-was shown the extension became the method of finding this equation when 
-necessary). To understand the importance of this, say we reduced both sides mod 
-a. The left side is a divisor of a and is therefore smaller than a, it doesn’t 
-reduce any further. But what happens to the right side? Obviously it reduces to 
-d as that is what the equation says it equals, but is there any more 
-information that can be gotten from that?
-
-Consider the following. Because d is a divisor of a, it must be smaller so it 
-reduces to itself. Then, because ra is a multiple of a, it reduces to zero.
+The extension allows us to find this equation. To understand the importance of this, say we reduced both sides by mod a. The left side is a divisor of a and is therefore smaller than a, it doesn’t reduce any further. But what happens to the right side? Obviously it reduces to d as that is what the equation says it equals, but is there any more information that can be gotten from that? Consider the following, because ra is a multiple of a, it reduces to zero.
 
 <img src="imgs/7. ExtendedEuclidean/PropertyOfGCDEquation.png">
 
@@ -337,9 +485,9 @@ remainders on the left-hand side. You should get what you see on the right.
 Further altering the series of equations we got in the previous slide, on the 
 right-hand side explicitly give a coefficient of 1 in parenthesis for all 
 numbers that don’t have coefficients. For the numbers that do have 
-coefficients, move the negative into the coefficient. On the left I have the 
-specific outcome for our example, on the right, I have a more general form. Now 
-I want to make some observations.
+coefficients in parenthesis, move the negative into the coefficient. On the 
+left below, I have the specific outcome for our example, on the right, I have 
+a more general form. Now I want to make some observations.
 
 <img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 
@@ -350,19 +498,19 @@ notice that every remainder on the left-hand side shows up in the equation of
 the next remainder. This could allow us to plug in the equation of a remainder 
 into the equation of the next remainder, which is exactly what we will do.
 
-Looking at the example equations we set up, look at the first two.
+Taking the example equations we set up, look at the first two.
 
 <img src="imgs/7. ExtendedEuclidean/ExampleFirstPart.png">
 
 Now take the equation for 15 (the second equation) and plug it into 15 in the 
-first equation. Then we simplify, but I will do it in a specific way to 
+first equation. Then we simplify, but we will do it in a specific way to 
 preserve the form and also make explicit a pattern that we will use to make an 
-algorithm using matrices.
+algorithm using matrices (specifically look at the last two equations).
 
 <img src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
 
-Now looking at our original series of equations replace the first two that we 
-took out with the single equation that we just derived.
+Looking at our original series of equations replace the first two that we 
+used with the single equation that we just derived.
 
 <img src="imgs/7. ExtendedEuclidean/NewSeries1.png">
 
@@ -383,68 +531,85 @@ Now see that the last equation is the exact one we are looking for! The
 extension to Euclid's algorithm is to collapse the equations together to get 
 one single equation, that’s it.
 
-Hopefully you saw my little notes that said to rememver the specific equations 
+Hopefully you saw my little notes that said to remember the specific equations 
 that showed up in the process, now we are going to use them to create matrices. 
 First, lets layout those forms in order.
 
 <img src="imgs/7. ExtendedEuclidean/ImportantParts.png">
 
-Look at the two parenthesis. Let’s say the first parenthesis holds the first 
+Look at the two pairs of parenthesis. Let’s say the first pair holds the first 
 index of a vector and the second parenthesis holds the second index. The second 
-equation then shows a transformation on the vector, and the third equation 
-shows the new vector. A linear transformation on a vector can be symbolized as 
-matrix vector multiplication.
+equation then shows a transformation occuring on the vector, and the third equation 
+shows the new vector. Remember that a linear transformation on a vector can be 
+symbolized as matrix vector multiplication.
 
 What is the transformation that turns our first equation into that third 
-equation? Notice that our first parenthesis (our vectors first index) has one 
-times the second index of the initial vector, so the first row of our matrix is 
-\[0  1]. The second parenthesis (second index) is the second index multiplied 
-by -15 plus the first index. So our second row is \[1  -15]. We now have enough 
-to write the following equation.
+equation? Notice that in our second equation, our first parenthesis 
+(our vectors first index) has one times the second index of the initial vector, so the first row of our matrix is \[0  1]. The second parenthesis (second index) is the second index multiplied by -15 plus the first index. So our second row is \[1  -15]. We now have enough to write the following equation.
 
 <img src="imgs/7. ExtendedEuclidean/FirstLinearTransformation.png">
+
+To understand where the negative fifteen came from, look at the original series
+of equations and notice that negative fifteen was the negative of our second
+to last quotient. The second index of our initial vector held the negative of
+our last quotient.
 
 Now looking at the third equation (represented by our new vector) and the 
 fourth equation (the next transformation to be represented by a matrix), we see 
 the same pattern. The first index of the new vector is just the second index of 
 the previous vector. The new second index is the old second index multiplied by 
-some number (in this case -3) plus the old first index. This pattern will 
-continue to the end so here is all the matrices to save time.
+the next negative quotient (in this case -3) plus the old first index. This 
+pattern will continue to the end so here is all the matrices to save time.
 
 <img src="imgs/7. ExtendedEuclidean/AllTransformations.png">
 
-But where did -1, -3, -15, and -1 come from? Look at the equations we showed a 
-little bit ago.
+Just so you can observe these matrices and the initial equations together,
+here are the initial equations again. See how the matrices are all the same
+except in the bottom right index which holds the negative quotients that can
+be seen in the equations.
 
 <img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 
-See how -1, -3, -15, and -1 are just −𝑞_1, −𝑞_2, −𝑞_3, and −𝑞_4? The whole 
-matrix equation can be generalized as seen below.
+See how -1, -3, -15, and -1 are just −𝑞_1, −𝑞_2, −𝑞_3, and −𝑞_4. This allows
+us to genralize the hold matrix process. Take the following diagram.
 
 <img src="imgs/7. ExtendedEuclidean/GeneralTransformations.png">
 
-Now look back at the final equation that the extended algorithm gave us in our 
-example.
+Now we are ready to put this into code. Take the following snippet. Notice That
+basic Euclidean algorithm is used, but we save each quotient that we come across.
+For the extended part we use numpy on python to set up a vector V. Then we create
+the matrices according to how we just saw, and multiply the matrix and vector 
+together, updating the vector V with the product.
+
+<img src="imgs/CodeSnippets/ExtendedPart1.PNG">
+
+Finally, we return r and s. Notice that we reduce them by their respective modulo.
+This is simply to keep it within our world of modular arithmetic, and it will solve
+the fact that one of the values would have been negative.
+
+<img src="imgs/CodeSnippets/ExtendedPart2.PNG">
+
+And now we are ready to create our keys for basic RSA. For the primes and the 
+encrypting exponent, I hard code answers. In reality, the primes need to be 
+chosen through a sufficiently random process and need to be much larger than
+the ones I use. However, such security practices are beyond our scope here.
+If you look back at the process we outlined for key creation, you will see
+this function is simply a step by step implementation of that, using all we
+have learned.
+
+<img src="imgs/CodeSnippets/KeyCreationBasic.PNG">
+
+Before we move on, look back at the final equation that the extended algorithm 
+gave us in our example.
 
 <img src="imgs/7. ExtendedEuclidean/GCDEquationExample.png">
 
 Notice that this can be written as the following dot product of the vector of 
 _r_ and _s_ and a vector containing 1158 and 873 (example on left, general on 
 right). This is neat just to see the final connection, but seeing as how we are 
-really just looking for _r_ and _s_, our computation can stop after what was 
-seen in the previous slide.
+really just looking for _r_ and _s_, our algorithm doesn't care about this.
 
 <img src="imgs/7. ExtendedEuclidean/DotProductForm.PNG">
-
-Now we are ready to put this into code. Take the following snippet:
-
-<img src="imgs/CodeSnippets/ExtendedPart1.PNG">
-
-<img src="imgs/CodeSnippets/ExtendedPart2.PNG">
-
-And now we are ready to create our keys for basic RSA.
-
-<img src="imgs/CodeSnippets/KeyCreationBasic.PNG">
 
 ## 8. The Chinese Remainder Theorem
 
