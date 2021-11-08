@@ -66,7 +66,9 @@ will show where they come from later). The algorithm for encrypting and
 decrypting is as follows, where k is the original number and h is the encrypted 
 number.
 
-<img src="imgs/1. BasicAlgorithm/BasicKeys.png">
+<p align="center">
+ <img src="imgs/1. BasicAlgorithm/BasicKeys.png">
+</p>
 
 The public key is the ordered pair of a number e and a number n. The number e 
 is the encryption exponent, and n is our modulo number. Likewise, the private 
