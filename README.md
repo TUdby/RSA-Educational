@@ -1,5 +1,11 @@
-# RSA-Educational
-The readme walks through RSA and the building of the example code provided.
+# RSA Educational
+The readme walks through RSA and the building of the example code provided. The
+code is made using python.
+
+I'm an undergraduate CS student, so I'm not claiming to be the expert, but I
+have spent a good amount of time on this and am confident in my work. That
+being said, if anyone more knowledgable finds any mistake do let me know so
+I can fix it and learn from it. Thank you, and I hope this is helpful!
 
 ## Overview / TOC
 
@@ -61,20 +67,17 @@ make a surprisingly elegent and efficient algorithm for RSA encryption.
 
 ## 1. The Basic Algorithm
 
-Assume we have a private key "Priv" and a public key "Pub" as shown below (we 
-will show where they come from later). The algorithm for encrypting and 
-decrypting is as follows, where k is the original number and h is the encrypted 
-number.
-
-<p align="center">
- <img width="100" src="imgs/1. BasicAlgorithm/BasicKeys.png">
-</p>
-
+Assume we have a private key "Priv" and a public key "Pub" as shown below. 
 The public key is the ordered pair of a number e and a number n. The number e 
 is the encryption exponent, and n is our modulo number. Likewise, the private 
-key is the pair of d and n, where d is the decryption exponent. With these 
-keys, the algorithm is
-shown below.
+key is the pair of d and n, where d is the decryption exponent.
+
+<p align="center">
+ <img width="125" src="imgs/1. BasicAlgorithm/BasicKeys.png">
+</p>
+
+With these keys, the algorithm for encrypting and decrypting is as follows, 
+where k is the original number and h is the encrypted number.
 
 <p align="center">
  <img width="400" src="imgs/1. BasicAlgorithm/BasicAlgorithm.png">
