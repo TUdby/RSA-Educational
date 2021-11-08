@@ -2,10 +2,8 @@
 The readme walks through RSA and the building of the example code provided. The
 code is made using python.
 
-I'm an undergraduate CS student, so I'm not claiming to be the expert, but I
-have spent a good amount of time on this and am confident in my work. That
-being said, if anyone more knowledgable finds any mistake do let me know so
-I can fix it and learn from it. Thank you, and I hope this is helpful!
+If anyone more knowledgable finds any mistake do let me know so
+I can fix it. Thank you, and I hope this is helpful!
 
 ## Overview / TOC
 
@@ -95,7 +93,7 @@ we will create this function later.
 
 ## 2. Modular Exponentiation
 
-The problem with that implementation is that, even for very small exponents, 
+The problem with that code snippet is that, even for very small exponents, 
 the number k taken to e and the number h taken to d will both be far too large 
 for the computer to handle efficiently. So to really implement the basic RSA 
 algorithm we need to look at another algorithm called modular exponentiation.
@@ -105,65 +103,94 @@ This is the sum of powers of two that add up to make the number (this process
 is used to translate decimal numbers into binary). Take 67 as an example:
 
 <p align="center">
- <img src="imgs/2. ModularExponentiation/BinaryExpansion.png">
+ <img width="300" src="imgs/2. ModularExponentiation/BinaryExpansion.png">
 </p>
 
 Knowing our exponent rules, a number to an exponent times that same number to 
 another exponent is that number to the sum of the exponents. This fact can also 
-be used to break a number to an exponent into pieces. For example, take 5 to 
+be used to break a number with an exponent into pieces. For example, take 5 to 
 the power of 67.
 
 <p align="center">
- <img src="imgs/2. ModularExponentiation/BinaryExponents.png">
+ <img width="150" src="imgs/2. ModularExponentiation/BinaryExponents.png">
 </p>
 
 Notice that we used this fact to break the exponent into its binary expansion.
 
-Now say we wanted to take 5 to the power of 67 and reduce it mod 29. 5 is 5 to 
-the first power. If we square it we get five squared. When this is reduced mod 
-21 we find that 5 squared is congruent to 4 mod 29. If we squared 4, this is 
-the same as squareing 5 squared, which is 5 to the fourth. Squared again and we 
-get 5 to the eighth. Continuing on we get 5 to the power of a number that is 
-itself a power of two. Using this process, we fill in the following table. See 
-how this process is able to calculate very large exponents through only a 
-little multiplication? (Infact, we will never deal with any number larger than 
-the square of one less than the modulo number.)
+Now say we wanted to take 5 to the power of 67 and reduce it mod 29. Below is
+a table. The first row is the exponent in terms of powers of two. The second
+row is the exponent, and the third row is 5 taken to the power in its column
+reduced by 29. To understand how we fill it out, start with the first column 
+(the first one with numbers, that is). Obviously, 5 is 5 to the first power. 
+If we square it we get five squared. When this is reduced mod 21 we find that 
+5 squared is congruent to 4 mod 29. If we squared 4, this is the same as
+squaring 5 squared, which is 5 to the fourth. We reduce it and the number we 
+are working with remains small, despite the exponent getting rather large. 
+Squared again and we get 5 to the eighth. We continue this process to fill out the table. See how this process is able to calculate very large exponents through only a little multiplication and relatively small numbers? (Infact, we will never deal with any number larger than the square of one less than the modulo number.)
 
 <p align="center">
- <img src="imgs/2. ModularExponentiation/PowersTable.png">
+ <img width="300" src="imgs/2. ModularExponentiation/PowersTable.png">
 </p>
 
 Using this table we see that:
 
 <p align="center">
- <img src="imgs/2. ModularExponentiation/ImportantPowers1.png">
+ <img width="150" src="imgs/2. ModularExponentiation/ImportantPowers1.png">
 </p>
 
 We also know that:
 
 <p align="center">
- <img src="imgs/2. ModularExponentiation/ImportantPowers2.png">
+ <img width="150" src="imgs/2. ModularExponentiation/ImportantPowers2.png">
 </p>
 
 Plugging in our values we see that:
 
 <p align="center">
- <img src="imgs/2. ModularExponentiation/FinalAnswer.png">
+ <img width="300" src="imgs/2. ModularExponentiation/FinalAnswer.png">
 </p>
 
-This whole algorithm is called modular exponentiation. Here is a snippet of 
-code where we implement this algorithm. 
+This also tells us how large the table needs to be. We continue the 
+exponentiation process until we have calculated the largest power in the
+binary expansion.
+
+This whole algorithm is called modular exponentiation. Here are snippets of 
+code where we implement this algorithm. First look at the following snippet.
+There are two parts to this snippet. First we find the largest power of
+two that is less than our exponent. Recall that this is the largest number
+of the table that we wish to create. The second part is where we create 
+the binary expansion. We do this by subtracting the current exponent by the
+largest power of two that is smaller than it, logging that power in the array,
+then finding the next power of two that is the largest power smaller than the
+new exponent. Continuing this process we find every power of two. (NOTE: for
+the sake of avoiding confusion, that storing the number of 13 means we are
+storing is referring to 2^13. The reason we only store the exponent of two, 
+which is itself the exponent of k, is based on the following observation. Look
+at the this exponent on the first row of our table and see that it starts at
+zero and increments by one. This zero based indexing allows us to use it to
+refer to the index of the array that will store the third row. It also tells
+us how many times the number was squared.)
 
 <p align="center">
- <img src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
+ <img width="300" src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
 </p>
 
-<p align="center">
- <img src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
-</p>
+In this second snippet, we create an array that corresponds to the third row
+of our table. We start with k, then square and reduce to find the next number.
+Observe that the largest power was stored into the zeroth index of our binary
+expansion, and it tells us how many times the largest index of the array that
+stores the third row.
 
 <p align="center">
- <img src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
+ <img width="300" src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
+</p>
+
+In this third and final snippet we use the powers in the binary expansion as
+the indices of the third row that need to be multiplied together. We do the
+multiplication, reduce by our modulo number, and return the answer.
+
+<p align="center">
+ <img width="300" src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
 </p>
 
 And now we simply tweek the basic algorithm by introducing this function call.
