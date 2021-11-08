@@ -126,7 +126,11 @@ If we square it we get five squared. When this is reduced mod 21 we find that
 5 squared is congruent to 4 mod 29. If we squared 4, this is the same as
 squaring 5 squared, which is 5 to the fourth. We reduce it and the number we 
 are working with remains small, despite the exponent getting rather large. 
-Squared again and we get 5 to the eighth. We continue this process to fill out the table. See how this process is able to calculate very large exponents through only a little multiplication and relatively small numbers? (Infact, we will never deal with any number larger than the square of one less than the modulo number.)
+Squared again and we get 5 to the eighth. We continue this process to fill out 
+the table. See how this process is able to calculate very large exponents 
+through only a little multiplication and relatively small numbers? (Infact, 
+we will never deal with any number larger than the square of one less than
+the modulo number.)
 
 <p align="center">
  <img width="500" src="imgs/2. ModularExponentiation/PowersTable.png">
@@ -320,16 +324,16 @@ This section was to help explain the phi function, now we'll see its importance.
 ## 5. Proving that the Basic Keys Work
 
 In the algorithm for basic RSA, we see that the decryption exponent d undoes 
-what the encryption exponent e does. Also, n the section on creating the keys 
+what the encryption exponent e does. Also, in the section on creating the keys 
 we said that d must be the inverse of e within the context of mod phi of n. Now 
 we need to show that if d is created in this manner, then it trully will 'undo' 
 e.
 
 First, Euler proved a theorem that is now called Eulers Theorem. This theorem 
-is as follow.
+is as follows.
 
 <p align="center">
- <img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+ <img height="35" src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
 </p>
 
 This states that any integer raised to the power of phi of n, then reduced mod 
@@ -339,14 +343,14 @@ We take the definition of d, multiply e to both sides, then subtract the one
 across. 
 
 <p align="center">
- <img src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
+ <img height="100" src="imgs/5. ProvingBasicKeys/DivisibleByPhi.png">
 </p>
 
 This says that ed-1 is 0 mod phi of n. That statment is equivalent to the 
 statment that there exists some number m where m times phi of n equals ed-1.
 
 <p align="center">
- <img src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
+ <img height="70" src="imgs/5. ProvingBasicKeys/MultipleOfPhi.png">
 </p>
 
 With all of this set up, here is the proof. Notice that we use the previous 
@@ -354,7 +358,7 @@ equality to swap out the exponent to be in terms of phi of n, then we take
 advantage of Eulers Theorem. This is why phi of n is central to RSA.
 
 <p align="center">
- <img src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
+ <img width="500" src="imgs/5. ProvingBasicKeys/ProvingTheKeysUndo.png">
 </p>
 
 ## 6. The Euclidean Algorithm
