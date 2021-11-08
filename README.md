@@ -378,12 +378,16 @@ into an equation. The equation states that if you have a dividend being
 divided by a divisor, then the dividend can be can be expressed as the divisor 
 times the quotient, plus the remainder.
 
+<p align="center">
 <img height="35" src="imgs/6. Euclidean Algorithm/DivisionEquation.png">
+</p>
 
 For example, if we divide 1158 by 873, we get a quotient of 1 with a remainder 
 of 285. This can be written as:
 
+<p align="center">
 <img height="35" src="imgs/6. Euclidean Algorithm/DivisionEquationExample.png">
+</p>
 
 Now say we had two numbers, a and b, where a is the larger of the two, and we 
 wanted to find their GCD. First, we set up the division equation that we just 
@@ -392,7 +396,9 @@ of the previous equation as our dividend, and the previous remainder as the new
 divisor, then we find the new quotient and remainder. We repeat this process 
 until we find a remainder of zero. The GCD is the last non-zero remainder, 𝑟_𝑛.
 
+<p align="center">
 <img width="300" src="imgs/6. Euclidean Algorithm/SeriesOfDivisions.png">
+</p>
 
 To see why the last non-zero remainder is the gcd, let’s first show that it is, 
 in fact, a divisor. Notice that the last equation in the previous diagram shows
@@ -409,7 +415,9 @@ But is it the _greatest_ common divisor? Say we have another divisor, d. Looking
 at the first equation, say we subtract 𝑏(𝑞_1) across to the other side. The 
 equation we get is:
 
+<p align="center">
 <img height="35" src="imgs/6. Euclidean Algorithm/RewrittenEquation.png">
+</p>
 
 Because d divides both a and b (because we assumed it was another common 
 divisor), it must divide the left side and therefore also the right side, which 
@@ -422,7 +430,9 @@ arbitrary divisor. This shows it is the GCD.
 Here is a quick example of using the Euclidean Algorithm to find that gcd⁡(1158, 
 873)=3
 
-<img width="400" src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
+<p align="center">
+<img width="300" src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
+</p>
 
 A simple implementation of the Euclidean Algorithm would be as follows. We will
 not be using this directly, but will tweek it for the creation of the extended 
