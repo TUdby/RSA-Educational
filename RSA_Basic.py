@@ -136,6 +136,8 @@ def extended_euclidean_algorithm(a, b):
         if remainder != 0:
             quotients.append(quotient)
     
+    quotients.reverse()
+    
     # Extended part assembles modulo inverse
     V = [1, -quotients[0]]
     for i in quotients[1:]:
