@@ -112,7 +112,7 @@ be used to break a number with an exponent into pieces. For example, take 5 to
 the power of 67.
 
 <p align="center">
- <img width="150" src="imgs/2. ModularExponentiation/BinaryExponents.png">
+ <img width="175" src="imgs/2. ModularExponentiation/BinaryExponents.png">
 </p>
 
 Notice that we used this fact to break the exponent into its binary expansion.
@@ -129,13 +129,13 @@ are working with remains small, despite the exponent getting rather large.
 Squared again and we get 5 to the eighth. We continue this process to fill out the table. See how this process is able to calculate very large exponents through only a little multiplication and relatively small numbers? (Infact, we will never deal with any number larger than the square of one less than the modulo number.)
 
 <p align="center">
- <img width="300" src="imgs/2. ModularExponentiation/PowersTable.png">
+ <img width="500" src="imgs/2. ModularExponentiation/PowersTable.png">
 </p>
 
 Using this table we see that:
 
 <p align="center">
- <img width="150" src="imgs/2. ModularExponentiation/ImportantPowers1.png">
+ <img width="250" src="imgs/2. ModularExponentiation/ImportantPowers1.png">
 </p>
 
 We also know that:
@@ -147,7 +147,7 @@ We also know that:
 Plugging in our values we see that:
 
 <p align="center">
- <img width="300" src="imgs/2. ModularExponentiation/FinalAnswer.png">
+ <img width="350" src="imgs/2. ModularExponentiation/FinalAnswer.png">
 </p>
 
 This also tells us how large the table needs to be. We continue the 
@@ -172,7 +172,7 @@ refer to the index of the array that will store the third row. It also tells
 us how many times the number was squared.)
 
 <p align="center">
- <img width="300" src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
+ <img width="500" src="imgs/CodeSnippets/ModularExponentiationPart1.PNG">
 </p>
 
 In this second snippet, we create an array that corresponds to the third row
@@ -182,7 +182,7 @@ expansion, and it tells us how many times the largest index of the array that
 stores the third row.
 
 <p align="center">
- <img width="300" src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
+ <img width="500" src="imgs/CodeSnippets/ModularExponentiationPart2.PNG">
 </p>
 
 In this third and final snippet we use the powers in the binary expansion as
