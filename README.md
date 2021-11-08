@@ -190,7 +190,7 @@ the indices of the third row that need to be multiplied together. We do the
 multiplication, reduce by our modulo number, and return the answer.
 
 <p align="center">
- <img width="300" src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
+ <img width="500" src="imgs/CodeSnippets/ModularExponentiationPart3.PNG">
 </p>
 
 And now we simply tweek the basic algorithm by introducing this function call.
@@ -205,10 +205,10 @@ Now we need to set up the keys for basic RSA. The process is shown in the image
 below. The steps are this.
 
  1. Choose two different prime numbers.
- 2. Multiply them together to get our number n
- 3. then use them to also find phi of n (more on this next section).
+ 2. Multiply them together to get our number n.
+ 3. Use them to also find phi of n (more on this next section).
  4. Choose an exponent e that is relatively prime to phi of n.
- 5. Find the inverse of e mod phi of n, this is our decryption exponent d
+ 5. Find the inverse of e mod phi of n, this is our decryption exponent d.
  6. Our keys are composed of e, d, and n.
 
 <p align="center">
@@ -219,28 +219,30 @@ While this is the process for creating the keys, it is not yet enough to
 understand what is going on or how to code it. In the next few sections we will 
 cover:
 
- - what the phi function is
- - why e is 'undone' by d mod n
- - how the extended euclidean algorithm works and how it gives us our inverse
+ - What the phi function is.
+ - Why e is 'undone' by d mod n.
+ - How the extended euclidean algorithm works and is used to give us inverses in 
+modular arithmetic.
 
 After this, we will understand basic RSA and will look at some code. But before 
 we move on to those sections, we need to understand what the "trapdoor" is with 
 RSA. By trapdoor, we mean the information that someone can encrypt without 
-knowing, but must know in order to decrypt. Thus, while we know the trapdoor 
-because we are the ones who created it, hackers need to search an obscenely 
-large amount of time to find it. If found, the trapdoor will let people into 
+knowing, but must know in order to decrypt. While we know the trapdoor because 
+we are the ones who created it, hackers need to search an obscenely large 
+amount of time to find it. If found, the trapdoor will let people into 
 our encrypted messages.
 
 The trapdoor in RSA is the relationship between our primes, p and q, and the 
-semiprime created by multiplying them together (n). It turns out that 
+semiprime created by multiplying them together, n. It turns out that 
 traditional computers and algorithms struggle immensely in breaking a large 
 semiprime into its primes.
 
 Notice that p and q are used to create phi of n. In turn, phi of n is used to 
-create the decryption exponent d. The way we use the primes to do this is not 
-something that can be extrapolated if we only know the semiprime. The 
-encryption exponent uses the semiprime to encrypt, but unless it is found out 
-how to break the semiprime into its primes, the decryption algorithm will not 
+create the decryption exponent d. However, the only connection to our primes
+that is made public is our semiprime n. Hackers need figure out how to efficiently
+break a large semiprime into the primes in order to find phi of n, and with it, 
+d. The encryption exponent uses the semiprime to encrypt, but unless it is found 
+out how to break the semiprime into its primes, the decryption algorithm will not 
 be found. This is the trapdoor of RSA.
 
 ## 4. Eulers Totient (The Phi Function)
@@ -251,7 +253,7 @@ function confuses some people because it appears to come in different forms. We
 saw that phi of our semiprime was:
 
 <p align="center">
- <img src="imgs/4. EulersTotient/SemiPrime.png">
+ <img height="30" src="imgs/4. EulersTotient/SemiPrime.png">
 </p>
 
 But later, when we cover the Chinese Remainder Theorem, we will use the fact 
@@ -264,7 +266,12 @@ that phi of a prime number is:
 So what is the phi function and why does it seem to have different forms? These 
 “different forms” turn out to all be specific results from the same general 
 form. The phi function is defined to answer the following question: if I input 
-a number n, how many numbers smaller than n are relatively prime to n?
+a number n, how many numbers smaller than n are relatively prime to n? That's
+why it was made, but we won't be referencing that anymore, I simply bring it
+up to demistify the function. The significance of phi comes from a theorem name 
+Eulers Theorem that we will cover in the next section. For the rest of the this
+section, I will show the general form, and show how it derives the specific forms 
+we will be using.
 
 Before we see the general function, remember that every number has a unique set 
 of prime factors. A certain unique prime factor may be multiplied more than 
@@ -278,24 +285,25 @@ number twelve:
 See that the prime factors of 12 are 3, 2, and 2. But two shows up twice so we 
 can write two to the power of 2. The unique prime factors are 3 and 2, and two 
 shows up multiple times as is shown by its exponent. This final form can be 
-generalized to the prime factorization of any number, and an be written as
+generalized to the prime factorization of any number, and can be written as
 
 <p align="center">
  <img src="imgs/4. EulersTotient/PrimeFactorizationGeneral.png">
 </p>
 
-Where each p is a unique prime factor and each a is the amount the respective 
+where each _p_ is a unique prime factor and each _a_ is the amount the respective 
 prime factor shows up. Using this definition of the prime factorization of a 
 natural number, the general form of the phi function is as follows (m is used 
-to mean the amount of unique prime factors).
+to mean the amount of unique prime factors, the same m used in the prime
+factorization above).
 
 <p align="center">
  <img src="imgs/4. EulersTotient/PhiFunction.png">
 </p>
 
-Where this formula comes from is beyond our scope here. The reason I bring it 
-up here is so that we can derive the specific forms for semiprimes and for 
-primes. Here is for semiprimes:
+Where this formula comes from is beyond our scope here (there are good videos
+on it on youtube). But let's use it to derive the specific forms for semiprimes 
+and for primes. Here is for semiprimes:
 
 <p align="center">
  <img src="imgs/4. EulersTotient/DerivingSemiPrime.png">
@@ -307,17 +315,7 @@ And here is for primes:
  <img src="imgs/4. EulersTotient/DerivingPrime.png">
 </p>
 
-We have already used the semiprime form, and will later use the prime form. So 
-this is what the function "is", by why is it important? That is the topic of 
-the next section.
-
-A simple implementation of the Euclidean Algorithm would be as follows. We will
-not be using this, but will tweek it for the creation of the extended 
-algorithm.
-
-<p align="center">
- <img src="imgs/CodeSnippets/Euclidean.PNG">
-</p>
+This section was to help explain the phi function, now we'll see its importance.
 
 ## 5. Proving that the Basic Keys Work
 
@@ -420,6 +418,14 @@ Here is a quick example of using the Euclidean Algorithm to find that gcd⁡(115
 873)=3
 
 <img src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
+
+A simple implementation of the Euclidean Algorithm would be as follows. We will
+not be using this, but will tweek it for the creation of the extended 
+algorithm.
+
+<p align="center">
+ <img src="imgs/CodeSnippets/Euclidean.PNG">
+</p>
 
 ## 7. The Extended Euclidean Algorithm
 
