@@ -370,45 +370,46 @@ extended part, lets first look at just the basic Euclidean Algorithm.
 
 The Euclidean Algorithm is meant to find the Greatest Common Divisor (gcd) 
 between two numbers. If the gcd is 1, the two numbers are called relatively 
-prime (also called coprime). The process starts by dividing the larger number  
+prime (also called coprime). The algorithm starts by dividing the larger number  
 by the smaller number and finding the remainder.
 
-When dividing two numbers and finding a remainder, the process can be put in an 
-equation. The equation states that if you have a dividend being divided by a 
-divisor, then the dividend can be can be expressed as the divisor times the 
-quotient, plus the remainder.
+When dividing two numbers and finding a remainder, the we can put the division 
+into an equation. The equation states that if you have a dividend being 
+divided by a divisor, then the dividend can be can be expressed as the divisor 
+times the quotient, plus the remainder.
 
-<img src="imgs/6. Euclidean Algorithm/DivisionEquation.png">
+<img height="35" src="imgs/6. Euclidean Algorithm/DivisionEquation.png">
 
 For example, if we divide 1158 by 873, we get a quotient of 1 with a remainder 
 of 285. This can be written as:
 
-<img src="imgs/6. Euclidean Algorithm/DivisionEquationExample.png">
+<img height="35" src="imgs/6. Euclidean Algorithm/DivisionEquationExample.png">
 
 Now say we had two numbers, a and b, where a is the larger of the two, and we 
-wanted to find their GCD. First, we set up the equation as we saw before. Then 
-we set up another division equation. This time we use the divisor of the 
-previous equation as our dividend, and the previous remainder as the new 
+wanted to find their GCD. First, we set up the division equation that we just 
+saw. Then we set up a second division equation. This time we use the divisor 
+of the previous equation as our dividend, and the previous remainder as the new 
 divisor, then we find the new quotient and remainder. We repeat this process 
 until we find a remainder of zero. The GCD is the last non-zero remainder, 𝑟_𝑛.
 
-<img src="imgs/6. Euclidean Algorithm/SeriesOfDivisions.png">
+<img width="300" src="imgs/6. Euclidean Algorithm/SeriesOfDivisions.png">
 
 To see why the last non-zero remainder is the gcd, let’s first show that it is, 
-in fact, a divisor. Notice that the last equation in the diagram (on the 
-previous slide) shows that 𝑟_𝑛 divides 𝑟_(𝑛−1). Using this, look at the second 
-to last equation. The right side is made up of a multiple of 𝑟_𝑛 and a multiple 
-of 𝑟_(𝑛−1) added together. Because 𝑟_𝑛 divides both of these, it therefore 
-divides the whole right side of the equation, which means it also divides the 
-left side of the equation, which is just 𝑟_(𝑛−2). This exact line of reasoning 
-can be repeated for the next equation and then the next, continuing until we 
-find that 𝑟_𝑛 must divide a and b. Therefore, it is a common divisor.
+in fact, a divisor. Notice that the last equation in the previous diagram shows
+that 𝑟_𝑛 divides 𝑟_(𝑛−1) (because 𝑟_(𝑛−1) is equal to 𝑟_𝑛 multiplied by some 
+integer). Using this, look at the second to last equation. The right side is 
+made up of a multiple of 𝑟_𝑛 and a multiple of 𝑟_(𝑛−1) added together. Because 
+𝑟_𝑛 divides both of these, it therefore divides the whole right side of the 
+equation, which means it also divides the left side of the equation, which is 
+just 𝑟_(𝑛−2). This exact line of reasoning can be repeated for the next 
+equation and then the next, continuing until we find that 𝑟_𝑛 must divide _a_ 
+and _b_. Therefore, it is a common divisor.
 
-But is it the greatest common divisor? Say we have another divisor, d. Looking 
+But is it the _greatest_ common divisor? Say we have another divisor, d. Looking 
 at the first equation, say we subtract 𝑏(𝑞_1) across to the other side. The 
 equation we get is:
 
-<img src="imgs/6. Euclidean Algorithm/RewrittenEquation.png">
+<img height="35" src="imgs/6. Euclidean Algorithm/RewrittenEquation.png">
 
 Because d divides both a and b (because we assumed it was another common 
 divisor), it must divide the left side and therefore also the right side, which 
@@ -421,10 +422,10 @@ arbitrary divisor. This shows it is the GCD.
 Here is a quick example of using the Euclidean Algorithm to find that gcd⁡(1158, 
 873)=3
 
-<img src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
+<img width="400" src="imgs/6. Euclidean Algorithm/EuclideanExample.png">
 
 A simple implementation of the Euclidean Algorithm would be as follows. We will
-not be using this, but will tweek it for the creation of the extended 
+not be using this directly, but will tweek it for the creation of the extended 
 algorithm.
 
 <p align="center">
