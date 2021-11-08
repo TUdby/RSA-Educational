@@ -66,8 +66,8 @@ will show where they come from later). The algorithm for encrypting and
 decrypting is as follows, where k is the original number and h is the encrypted 
 number.
 
-<p width="10" align="center">
- <img src="imgs/1. BasicAlgorithm/BasicKeys.png">
+<p align="center">
+ <img width="50" src="imgs/1. BasicAlgorithm/BasicKeys.png">
 </p>
 
 The public key is the ordered pair of a number e and a number n. The number e 
