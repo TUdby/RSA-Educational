@@ -66,7 +66,7 @@ will show where they come from later). The algorithm for encrypting and
 decrypting is as follows, where k is the original number and h is the encrypted 
 number.
 
-<p align="center">
+<p width="50" align="center">
  <img src="imgs/1. BasicAlgorithm/BasicKeys.png">
 </p>
 
