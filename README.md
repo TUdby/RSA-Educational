@@ -448,19 +448,11 @@ That was a thorough enough treatment on the basic Euclidean Algorithm, now for
 the extension. Say d is the gcd of a and b. There exists an r and an s such 
 that:
 
+<p align="center">
 <img src="imgs/7. ExtendedEuclidean/GCDEquation.png">
+</p>
 
-The extension is about finding this equation (or rather, the extension is what 
-found the existence of this equation, and once the importance of this equation 
-was shown the extension became the method of finding this equation when 
-necessary). To understand the importance of this, say we reduced both sides mod 
-a. The left side is a divisor of a and is therefore smaller than a, it doesn’t 
-reduce any further. But what happens to the right side? Obviously it reduces to 
-d as that is what the equation says it equals, but is there any more 
-information that can be gotten from that?
-
-Consider the following. Because d is a divisor of a, it must be smaller so it 
-reduces to itself. Then, because ra is a multiple of a, it reduces to zero.
+The extension allows us to find this equation. To understand the importance of this, say we reduced both sides by mod a. The left side is a divisor of a and is therefore smaller than a, it doesn’t reduce any further. But what happens to the right side? Obviously it reduces to d as that is what the equation says it equals, but is there any more information that can be gotten from that? Consider the following, because ra is a multiple of a, it reduces to zero.
 
 <img src="imgs/7. ExtendedEuclidean/PropertyOfGCDEquation.png">
 
@@ -493,9 +485,9 @@ remainders on the left-hand side. You should get what you see on the right.
 Further altering the series of equations we got in the previous slide, on the 
 right-hand side explicitly give a coefficient of 1 in parenthesis for all 
 numbers that don’t have coefficients. For the numbers that do have 
-coefficients, move the negative into the coefficient. On the left I have the 
-specific outcome for our example, on the right, I have a more general form. Now 
-I want to make some observations.
+coefficients in parenthesis, move the negative into the coefficient. On the 
+left below, I have the specific outcome for our example, on the right, I have 
+a more general form. Now I want to make some observations.
 
 <img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 
@@ -506,19 +498,19 @@ notice that every remainder on the left-hand side shows up in the equation of
 the next remainder. This could allow us to plug in the equation of a remainder 
 into the equation of the next remainder, which is exactly what we will do.
 
-Looking at the example equations we set up, look at the first two.
+Taking the example equations we set up, look at the first two.
 
 <img src="imgs/7. ExtendedEuclidean/ExampleFirstPart.png">
 
 Now take the equation for 15 (the second equation) and plug it into 15 in the 
-first equation. Then we simplify, but I will do it in a specific way to 
+first equation. Then we simplify, but we will do it in a specific way to 
 preserve the form and also make explicit a pattern that we will use to make an 
-algorithm using matrices.
+algorithm using matrices (specifically look at the last two equations).
 
 <img src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
 
-Now looking at our original series of equations replace the first two that we 
-took out with the single equation that we just derived.
+Looking at our original series of equations replace the first two that we 
+used with the single equation that we just derived.
 
 <img src="imgs/7. ExtendedEuclidean/NewSeries1.png">
 
@@ -539,68 +531,85 @@ Now see that the last equation is the exact one we are looking for! The
 extension to Euclid's algorithm is to collapse the equations together to get 
 one single equation, that’s it.
 
-Hopefully you saw my little notes that said to rememver the specific equations 
+Hopefully you saw my little notes that said to remember the specific equations 
 that showed up in the process, now we are going to use them to create matrices. 
 First, lets layout those forms in order.
 
 <img src="imgs/7. ExtendedEuclidean/ImportantParts.png">
 
-Look at the two parenthesis. Let’s say the first parenthesis holds the first 
+Look at the two pairs of parenthesis. Let’s say the first pair holds the first 
 index of a vector and the second parenthesis holds the second index. The second 
-equation then shows a transformation on the vector, and the third equation 
-shows the new vector. A linear transformation on a vector can be symbolized as 
-matrix vector multiplication.
+equation then shows a transformation occuring on the vector, and the third equation 
+shows the new vector. Remember that a linear transformation on a vector can be 
+symbolized as matrix vector multiplication.
 
 What is the transformation that turns our first equation into that third 
-equation? Notice that our first parenthesis (our vectors first index) has one 
-times the second index of the initial vector, so the first row of our matrix is 
-\[0  1]. The second parenthesis (second index) is the second index multiplied 
-by -15 plus the first index. So our second row is \[1  -15]. We now have enough 
-to write the following equation.
+equation? Notice that in our second equation, our first parenthesis 
+(our vectors first index) has one times the second index of the initial vector, so the first row of our matrix is \[0  1]. The second parenthesis (second index) is the second index multiplied by -15 plus the first index. So our second row is \[1  -15]. We now have enough to write the following equation.
 
 <img src="imgs/7. ExtendedEuclidean/FirstLinearTransformation.png">
+
+To understand where the negative fifteen came from, look at the original series
+of equations and notice that negative fifteen was the negative of our second
+to last quotient. The second index of our initial vector held the negative of
+our last quotient.
 
 Now looking at the third equation (represented by our new vector) and the 
 fourth equation (the next transformation to be represented by a matrix), we see 
 the same pattern. The first index of the new vector is just the second index of 
 the previous vector. The new second index is the old second index multiplied by 
-some number (in this case -3) plus the old first index. This pattern will 
-continue to the end so here is all the matrices to save time.
+the next negative quotient (in this case -3) plus the old first index. This 
+pattern will continue to the end so here is all the matrices to save time.
 
 <img src="imgs/7. ExtendedEuclidean/AllTransformations.png">
 
-But where did -1, -3, -15, and -1 come from? Look at the equations we showed a 
-little bit ago.
+Just so you can observe these matrices and the initial equations together,
+here are the initial equations again. See how the matrices are all the same
+except in the bottom right index which holds the negative quotients that can
+be seen in the equations.
 
 <img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 
-See how -1, -3, -15, and -1 are just −𝑞_1, −𝑞_2, −𝑞_3, and −𝑞_4? The whole 
-matrix equation can be generalized as seen below.
+See how -1, -3, -15, and -1 are just −𝑞_1, −𝑞_2, −𝑞_3, and −𝑞_4. This allows
+us to genralize the hold matrix process. Take the following diagram.
 
 <img src="imgs/7. ExtendedEuclidean/GeneralTransformations.png">
 
-Now look back at the final equation that the extended algorithm gave us in our 
-example.
+Now we are ready to put this into code. Take the following snippet. Notice That
+basic Euclidean algorithm is used, but we save each quotient that we come across.
+For the extended part we use numpy on python to set up a vector V. Then we create
+the matrices according to how we just saw, and multiply the matrix and vector 
+together, updating the vector V with the product.
+
+<img src="imgs/CodeSnippets/ExtendedPart1.PNG">
+
+Finally, we return r and s. Notice that we reduce them by their respective modulo.
+This is simply to keep it within our world of modular arithmetic, and it will solve
+the fact that one of the values would have been negative.
+
+<img src="imgs/CodeSnippets/ExtendedPart2.PNG">
+
+And now we are ready to create our keys for basic RSA. For the primes and the 
+encrypting exponent, I hard code answers. In reality, the primes need to be 
+chosen through a sufficiently random process and need to be much larger than
+the ones I use. However, such security practices are beyond our scope here.
+If you look back at the process we outlined for key creation, you will see
+this function is simply a step by step implementation of that, using all we
+have learned.
+
+<img src="imgs/CodeSnippets/KeyCreationBasic.PNG">
+
+Before we move on, look back at the final equation that the extended algorithm 
+gave us in our example.
 
 <img src="imgs/7. ExtendedEuclidean/GCDEquationExample.png">
 
 Notice that this can be written as the following dot product of the vector of 
 _r_ and _s_ and a vector containing 1158 and 873 (example on left, general on 
 right). This is neat just to see the final connection, but seeing as how we are 
-really just looking for _r_ and _s_, our computation can stop after what was 
-seen in the previous slide.
+really just looking for _r_ and _s_, our algorithm doesn't care about this.
 
 <img src="imgs/7. ExtendedEuclidean/DotProductForm.PNG">
-
-Now we are ready to put this into code. Take the following snippet:
-
-<img src="imgs/CodeSnippets/ExtendedPart1.PNG">
-
-<img src="imgs/CodeSnippets/ExtendedPart2.PNG">
-
-And now we are ready to create our keys for basic RSA.
-
-<img src="imgs/CodeSnippets/KeyCreationBasic.PNG">
 
 ## 8. The Chinese Remainder Theorem
 
