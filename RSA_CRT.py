@@ -180,4 +180,7 @@ def extended_euclidean_algorithm(a, b):
     return V[0] % a_initial, V[1] % b_initial
     
     
-main()
+
+
+if __name__ == "__main__":
+    main()
