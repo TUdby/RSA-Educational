@@ -663,7 +663,7 @@ question. If I have h mod a and k mod b, is there a number x that is congruent
 to both numbers? If so, what is it?
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
+ <img height="70" src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
 </p>
 
 In fact, CRT asks this question for an arbitrary amount of numbers. On top of h mod a and k mod b we could 
@@ -674,7 +674,7 @@ show how all results can generalize to larger amounts of numbers. Let’s
 understand this question better by looking at an example.
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/QuestionExample.png">
+ <img height="70" src="imgs/8. ChineseRemainderTheorem/QuestionExample.png">
 </p>
 
 Is there an x that is congruent to both of these? Let’s try to create such an 
@@ -718,7 +718,7 @@ created such a way will reduce to a single value mod 20, so the complete answer
 can be stated as follows:
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/ExampleAnswer.png">
+ <img height="35" src="imgs/8. ChineseRemainderTheorem/ExampleAnswer.png">
 </p>
 
 Let’s take it up a notch. Can we create a method to reconstruct x for any 
@@ -726,7 +726,7 @@ arbitrary number in mod 4 and any number mod 5? A method where we can always
 find x where:
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralQuestion.png">
+ <img height="70" src="imgs/8. ChineseRemainderTheorem/SlightGeneralQuestion.png">
 </p>
 
 We can’t do the guess and check like before (and good riddance), so this 
@@ -748,7 +748,7 @@ mod 4. Thankfully, the extended Euclidean algorithm finds both of these at the
 same time! Doing the  work, we find that:
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess2.png">
+ <img height="70" src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess2.png">
 </p>
 
 So x can be set up as follows.
@@ -768,7 +768,7 @@ rather than 4 and 5. Going through the same logic that we have already done,
 you can see that if you want an x where 
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
+ <img height="70" src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
 </p>
 
 Then x can be constructed as
@@ -787,7 +787,7 @@ We need a few more results before we rejoin RSA. First lets say we have the
 inverses of our primes (found using the extended Euclidean):
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/PrimeInverses.png">
+ <img height="70" src="imgs/8. ChineseRemainderTheorem/PrimeInverses.png">
 </p>
 
 Let’s say we have a number k mod n (remember that n is the semiprime made 
@@ -809,20 +809,20 @@ Notice how delta does the ‘break apart’ process we just saw? Now define delt
 inverse. It takes in the ordered pair and puts out a number mod n.
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
+ <img height="35" src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
 </p>
 
 This function clearly does the ‘stitching together’ part. See how delta inverse undoes delta (which is obviously why I referred to it as the inverse)?
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
+ <img height="35" src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
 </p>
 
 Here let's introduce some more symbols. The symbol on the left means “the set of integers mod n”, the symbol on the right means “the set of ordered pairs containing an 
 integer mod p and an integer mod q”.
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/Integers.png">
+ <img height="35" src="imgs/8. ChineseRemainderTheorem/Integers.png">
 </p>
 
 Looking at the delta function, you could say that it 'maps' from an element of that
@@ -834,7 +834,7 @@ write that that delta maps from the set of integers mod n to the set of ordered 
 and delta inverse maps in the opposite direction.
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
+ <img height="90" src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
 </p>
 
 We are almost ready to tie this into RSA encryption, we just need one more 
@@ -842,7 +842,7 @@ important result from CRT. First, there is a rule in modular arithmetic that
 states: 
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/MultiplicationRule.png">
+ <img height="35" src="imgs/8. ChineseRemainderTheorem/MultiplicationRule.png">
 </p>
 
 Using this rule, we show that squaring a number and reducing it mod n is
@@ -850,7 +850,7 @@ the same thing as breaking the number apart, squaring it, and then reassembling
 it by CRT.
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/ExponentWithCRT.png">
+ <img width="500" src="imgs/8. ChineseRemainderTheorem/ExponentWithCRT.png">
 </p>
 
 Obviously, this logic can be generalized to any positive whole number exponent, 
