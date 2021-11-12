@@ -520,7 +520,7 @@ preserve the form and also make explicit a pattern that we will use to make an
 algorithm using matrices (specifically look at the last two equations).
 
 <p align="center">
- <img width="400" src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
+ <img width="500" src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
 </p>
 
 Looking at our original series of equations replace the first two that we 
@@ -534,7 +534,7 @@ Now take the second equation and plug the remainder 18 into the 18 of the first
 equation and reduce (this is simply repeating the process we did before).
 
 <p align="center">
- <img width="400" src="imgs/7. ExtendedEuclidean/SecondPartProcess.png">
+ <img width="500" src="imgs/7. ExtendedEuclidean/SecondPartProcess.png">
 </p>
 
 Again, replace the first two equations with the new one.
