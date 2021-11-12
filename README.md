@@ -1,14 +1,13 @@
 # RSA Educational
-The readme walks through RSA and the building of the example code provided. The
-code is made using python.
+This readme walks through the math of RSA and the building of the example code provided. The code is made using python.
 
-If anyone more knowledgable finds any mistake do let me know so
+If anyone finds any mistake do let me know, that way
 I can fix it. Thank you, and I hope this is helpful!
 
 ## Overview / TOC
 
 RSA encryption is an asymmetric encryption algorithm, meaning it has a public
-used to encrypt and a private key used to decrypt. Now the RSA algorithm can
+key used to encrypt and a private key used to decrypt. The RSA algorithm can
 be enhanced by something called the Chinese Remainder Theorem. We will 
 go over that, but first we will go over basic RSA without it. While talking on 
 RSA, we go over code snippits when appropriate and build up to the example code 
@@ -18,7 +17,7 @@ cover are:
  [1. The Basic Algorithm](#1-the-basic-algorithm)
 
  - Given the keys, how do we encyrpt and decrypt? In this section we do not
-yet build the key as that requires more math that we cover in later sections.
+yet build the keys as that requires more math that we will cover in later sections.
 
  [2. Modular Exponentiation](#2-modular-exponentiation)
 
@@ -28,29 +27,30 @@ it, the computer could not execute the process required to use the keys.
  [3. Basic Keys](#3-basic-keys)
 
  - This section outlines the steps in creating the keys; however, more mathematics
-is necessary to implement this process and will be covered oer the next few 
+is necessary to implement this process and will be covered over the next few 
 sections.
 
  [4. Eulers Totient (The Phi Function)](#4-eulers-totient-the-phi-function)
 
  - A function that is important in number theory and essential to RSA. We go over
-it in sufficient detail to remove confusion about what it is and the different
-forms it shos up in.
+it in sufficient detail to remove confusion about what it is and where the different
+forms we use it in come from.
 
  [5. Proving the Basic Keys Work](#5-proving-that-the-basic-keys-work)
 
- - The previous section allows this section to show why the keys work the way we
-need them to. We still do show how to create them yet.
+ - Here we use the Phi function and Eulers Theorem to prove that the keys work the way we need them to. We still do not show how to create them yet.
 
  [6. The Euclidean Algorithm](#6-the-euclidean-algorithm)
 
- - The Euclidean Algorithm is necessary to understand the Extended Euclidean
-Algorithm.
+ - The Euclidean Algorithm is necessary to build up to the Extended Euclidean
+Algorithm, which we need.
 
  [7. The Extended Euclidean Algorithm](#7-the-extended-euclidean-algorithm)
 
  - This algorithm is how we find inverses of integers in modular arithmetic, 
-and is what allows us to actually create our keys.
+and is what allows us to actually create our keys. In this section, we are
+finally able to code our key creation. This, along with the code for the algorithm
+that we came up with in section 2 is a complete implementation basic RSA.
 
  [8. The Chinese Remainder Theorem](#8-the-chinese-remainder-theorem)
 
@@ -60,7 +60,7 @@ general, laying the groundwork for the next section.
 
  [9. RSA using the Chinese Remainder Theorem](#9-rsa-with-crt)
 
- - In this section we bring together CRT and everything else we have learned to
+ - In this section we bring together CRT and RSA to
 make a surprisingly elegent and efficient algorithm for RSA encryption.
 
 ## 1. The Basic Algorithm
