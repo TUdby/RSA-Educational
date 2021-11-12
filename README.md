@@ -52,13 +52,13 @@ Algorithm.
 This algorithm is how we find inverses of integers in modular arithmetic, 
 and is what allows us to actually create our keys.
 
- [8. The Chinese Remainder Theorem](#the-chinese-remainder-theorem)
+ [8. The Chinese Remainder Theorem](#8-the-chinese-remainder-theorem)
 
 This theorem is not essential for RSA, but allows the implementation of 
 decryption to be made more efficent. This section goes over the theorem in
 general, laying the groundwork for the next section.
 
- [9. RSA using the Chinese Remainder Theorem](#rsa-with-crt)
+ [9. RSA using the Chinese Remainder Theorem](#9-rsa-with-crt)
 
 In this section we bring together CRT and everything else we have learned to
 make a surprisingly elegent and efficient algorithm for RSA encryption.
