@@ -655,7 +655,7 @@ really just looking for _r_ and _s_, our algorithm doesn't care about this.
 
 ## 8. The Chinese Remainder Theorem
 
-Now we are ready to add the chinese remainder theorem. First we will look
+Now we are ready to start on the chinese remainder theorem. First we will look
 at the theorem itself in general, then we will see what it means for RSA.
 
 The Chinese Remainder Theorem (CRT) is about answering the following type of 
@@ -666,9 +666,10 @@ to both numbers? If so, what is it?
  <img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
 </p>
 
-In fact, CRT asks this question for an arbitrary amount of numbers. We could 
-add 'a j mod c, a g mod d and so on. However, for RSA we are going to look at 
-just two numbers so we’ll keep it at that for now. A little bit of thought will 
+In fact, CRT asks this question for an arbitrary amount of numbers. On top of h mod a and k mod b we could 
+add j mod c g mod d and more and ask if there is an x that satisfies being congruent
+to all of them; however, for RSA we are going to look at 
+just two numbers so we’ll keep it at two here. A little bit of thought on your own will 
 show how all results can generalize to larger amounts of numbers. Let’s 
 understand this question better by looking at an example.
 
@@ -684,11 +685,16 @@ mod 4 part.
  <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess1.png">
 </p>
 
-In the mod 5 section, I want a number that will reduce to 3, but I also don’t 
-want it to interfere with the mod 4 section (and vice versa). To stop it from 
-interfering with the mod 4 section, I could multiply everything in the mod 5 
-section by 4. That way, when I reduce mod 4 it will reduce to zero. Likewise, I 
-can put a five in the mod 4 section for a symmetric effect.
+To make sense of why we started like this, say that in the mod 5 section put a number that will reduce to 3, but in the mod 4 section we multiply whatever goes there by 5.
+If we reduced the whole number by five, the mod 5 section would reduce to three and the
+mod 4 section would reduce to 0, causing the whole expression to be 3 mod 5. Likewise,
+if I multiply the mod 5 section by 4 and make sure the mod 4 section has a number that 
+reduces to 2 mod 4, then the entire section will reduce to 2 mod 4. After we do this,
+we can gaurantee that we have found a candidate for x.
+
+In the following image we placed a 4 in the mod 5 section and a 5 in the mod 4 section,
+everything we put in these sections will be multiplied by these numbers, allowing us 
+to zero out the other section when we reduce by either 4 or 5.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess2.png">
@@ -709,32 +715,32 @@ reduced it mod 5 this number we are adding reduces to zero and so doesn’t stop
 x from reducing to 3 mod 5. The same happens with mod 4. So adding 20, or any 
 multiple of 20, will always return a valid value for x. All numbers that can be 
 created such a way will reduce to a single value mod 20, so the complete answer 
-can be stated as follow:
+can be stated as follows:
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/ExampleAnswer.png">
 </p>
 
-Let’s take it up a notch. Can I create a method to reconstruct x for any 
-arbitrary number in mod 4 and any number mod 5? A method where I can always 
-find x where 
+Let’s take it up a notch. Can we create a method to reconstruct x for any 
+arbitrary number in mod 4 and any number mod 5? A method where we can always 
+find x where:
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralQuestion.png">
 </p>
 
-Now I can’t do the guess and check like before (and good riddance), so this 
+We can’t do the guess and check like before (and good riddance), so this 
 method needs to be far more algorithmically sound. First, lets start as we did 
-before by placing 4 in a mod 5 section and 5 in a mod 4 section.
+before by placing 4 in the mod 5 section and 5 in the mod 4 section.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess1.png">
 </p>
 
-But now ask, what if I found a number that was the inverse of 4 mod 5 and 
+Now consider this question: what if we found a number that was the inverse of 4 mod 5 and 
 multiplied it into the mod 5 section? By definition, the mod 5 section would 
 reduce to one. The same could be done by putting the inverse of 5 mod 4 in the 
-mod 4 section. Then, if I multiply h into the mod 5 section, x would reduce to 
+mod 4 section. Then, if we multiply h into the mod 5 section, x would reduce to 
 h mod 5, whatever h is. Likewise with k in the mod 4 section.
 
 So we need to find a number that is the inverse of 4 mod 5 and the inverse of 5 
@@ -751,7 +757,7 @@ So x can be set up as follows.
  <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess3.png">
 </p>
 
-Finally, remember that all possible x's are congruent to this x mod 5 times 4.
+Finally, remember that all possible x's are congruent to this x within the modulus of 5 times 4.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralAnswer.png">
@@ -771,63 +777,61 @@ Then x can be constructed as
  <img src="imgs/8. ChineseRemainderTheorem/GeneralAnswer.png">
 </p>
 
-Notice that that we can only find r and is if a and b are coprime, otherwise 
+Remember from the extended euclidean algorithm that that we can only find these 
+inverses (r and s) if a and b are coprime, otherwise 
 the inverses don’t exist. This is the general conclusion of CRT, that x exists 
-if the modulo numbers are coprime and can be constructed according to the 
+if the modulo numbers are coprime and can be constructed through to the 
 formula above.
 
-Let’s now build up to why CRT can help us in RSA. First lets say we have the 
+We need a few more results before we rejoin RSA. First lets say we have the 
 inverses of our primes (found using the extended Euclidean):
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/PrimeInverses.png">
 </p>
 
-Now let’s say we have a number k mod n. Remember that n is the semiprime made 
-of multiplying p and q together. We can break k into mod p and mod q and 
-reassemble it using r and s.
+Let’s say we have a number k mod n (remember that n is the semiprime made 
+of multiplying p and q together). See below how we can break k into mod p and mod q and 
+reassemble it using r and s?
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/BreakAndBuildProcess.png">
 </p>
 
-Now let me define two functions. First is delta, it takes a number mod n and 
-breaks it into an ordered pair.
+Inspired by this, let us define two functions. First is delta, it takes a number mod n 
+and breaks it into an ordered pair.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/Delta.png">
 </p>
 
-Notice how delta does the ‘break apart’ process from CRT? Now define delta 
+Notice how delta does the ‘break apart’ process we just saw? Now define delta 
 inverse. It takes in the ordered pair and puts out a number mod n.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
 </p>
 
-This function clearly does the ‘stitching together’ process that we found in 
-CRT. See how delta inverse undoes delta?
+This function clearly does the ‘stitching together’ part. See how delta inverse undoes delta (which is obviously why I referred to it as the inverse)?
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
 </p>
 
-Now for some more symbols. The symbol on the left means “the set of integers 
-mod n”, the symbol on the right means “the set of ordered pairs containing an 
+Here let's introduce some more symbols. The symbol on the left means “the set of integers mod n”, the symbol on the right means “the set of ordered pairs containing an 
 integer mod p and an integer mod q”.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/Integers.png">
 </p>
 
-n this context, an arrow from one set to another means that the set is “mapped” 
-to the set it points to. In other words, its elements are mapped to the 
-elements of the other set. If a function is put above the arrow, it shows that 
-the function is what is defining the mapping (there’s another way of notating 
-this that is more common, but this way is more convenient for us for reasons 
-that will make sense in a second). Using this notation, see that delta ‘maps’ 
-from the set of integers mod n to the set of ordered pairs, and delta inverse 
-maps in the opposite direction.
+Looking at the delta function, you could say that it 'maps' from an element of that
+set symbolized on the left onto an element of the set of ordered pairs on the right.
+We symbolize this in the image below. An arrow from one set to another means that the 
+set is mapped to the set it points to. By putting a function above the arrow, we are
+saying that the function is the one defining the mapping. Using this notation, we can
+write that that delta maps from the set of integers mod n to the set of ordered pairs,  
+and delta inverse maps in the opposite direction.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
@@ -841,16 +845,16 @@ states:
  <img src="imgs/8. ChineseRemainderTheorem/MultiplicationRule.png">
 </p>
 
-Using this rule, see if you can follow this:
+Using this rule, we show that squaring a number and reducing it mod n is
+the same thing as breaking the number apart, squaring it, and then reassembling
+it by CRT.
 
 <p align="center">
  <img src="imgs/8. ChineseRemainderTheorem/ExponentWithCRT.png">
 </p>
 
-It's messy, but the diagram shows that taking the exponent on the number and 
-breaking it apart is the same as first breaking it apart and taking it to the 
-exponent (the logic can be generalized to any positive whole number exponent, 
-not just squaring).
+Obviously, this logic can be generalized to any positive whole number exponent, 
+not just squaring. Now we are ready for RSA.
 
 ## 9. RSA With CRT
 
