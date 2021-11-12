@@ -863,7 +863,7 @@ we defined a function that took an ordered pair of numbers each to the
 encrypting exponent? Take the following function E, the encrypting function.
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/EncryptionFunction.png">
+ <img height="55" src="imgs/9. RSAwithCRT/EncryptionFunction.png">
 </p>
 
 (NOTE: To encrypt like this you need the primes to break apart the numbers, 
@@ -874,19 +874,19 @@ was in basic RSA, but we are going to develop a better way to decrypt.)
 Now recall Eulers Theorem that stated:
 
 <p align="center">
- <img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+ <img height="55" src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
 </p>
 
 And remember that phi of a prime can be shown to be the prime minus 1.
 
 <p align="center">
- <img src="imgs/4. EulersTotient/Prime.png">
+ <img height="55" src="imgs/4. EulersTotient/Prime.png">
 </p>
 
 Say e was greater than p - 1. Define the following.
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/e1.png">
+ <img height="35" src="imgs/9. RSAwithCRT/e1.png">
 </p>
 
 Putting these together, look at how we can reduce the size of an exponent mod p 
@@ -904,7 +904,7 @@ reduce our encrypting exponent.
 Using all this, let's redefine our encryption function E to the following:
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/EncryptionFunctionReducedExponent.png">
+ <img width="500" src="imgs/9. RSAwithCRT/EncryptionFunctionReducedExponent.png">
 </p>
 
 Encryption using CRT can then be shown using the following diagram 
@@ -913,7 +913,7 @@ algorithm, but decryption in CRT is the process of reversing this so it's here
 for the setup).
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/EncryptionAlgorithm.png">
+ <img width="500" src="imgs/9. RSAwithCRT/EncryptionAlgorithm.png">
 </p>
 
 (NOTE: the arrow on the left is dotted because that is how the basic RSA 
@@ -927,7 +927,7 @@ We already proved the inverse of an encrypting exponent in mod phi of the
 modulo will give the decrypting exponent, so define the following:
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/DecryptionExponents.png">
+ <img width="500" src="imgs/9. RSAwithCRT/DecryptionExponents.png">
 </p>
 
 See now that our decryption function can be defined as follows:
@@ -943,7 +943,7 @@ Inverse. This gives the same answer as though we had taken h to the basic
 decryption exponent and reduced mod n.
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/DecryptionAlgorithm.png">
+ <img width="500" src="imgs/9. RSAwithCRT/DecryptionAlgorithm.png">
 </p>
 
 So why would we want to use CRT to decrypt? Notice how we are operating in mod 
@@ -978,7 +978,7 @@ tuple (qr, ps) and store it in the variable "delta_inverse," the the function wi
 be simply doing to the tuple dot product and reducing mod n.
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/KeyCreation.png">
+ <img width="550" src="imgs/9. RSAwithCRT/KeyCreation.png">
 </p>
 
 Let's put this key creation into code. Here is a key generating function for RSA encryption using the Chinese Remainder Theorem. See that each section lines up
@@ -987,7 +987,7 @@ point out that the "ta" variable that catches a value from the extended euclidea
 stands for "throw away" because I don't need that value.
 
 <p align="center">
- <img src="imgs/CodeSnippets/KeyCreationCRT.PNG">
+ <img width="550" src="imgs/CodeSnippets/KeyCreationCRT.PNG">
 </p>
  
 Now for the algorithm. The version on the left is the more verbose, the one on 
@@ -995,7 +995,7 @@ the right is the condensed version. Encryption is the same, decryption is as we 
 already laid out.
 
 <p align="center">
- <img src="imgs/9. RSAwithCRT/Algorithm.png">
+ <img width="550" src="imgs/9. RSAwithCRT/Algorithm.png">
 </p>
 
 As complicated as it was to get here, the coding process is extremely simple, 
@@ -1003,7 +1003,7 @@ so lets look at some code. We get the go, pass through delta, conduct the
 decryption algorithm, then pass through delta inverse. That's it.
 
 <p align="center">
- <img src="imgs/CodeSnippets/DecryptionCRT.PNG">
+ <img width="550" src="imgs/CodeSnippets/DecryptionCRT.PNG">
 </p>
 
 ## The Provided Code
@@ -1028,5 +1028,5 @@ under any professional security scrutiny. With that being said, I hope this help
 Here is a snippet showing the code running.
 
 <p align="center">
-  <imp src="imgs/CodeSnippets/run.png">
+  <img src="imgs/CodeSnippets/run.png">
 </p>
