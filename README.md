@@ -449,7 +449,7 @@ the extension. Say d is the gcd of a and b. There exists an r and an s such
 that:
 
 <p align="center">
-<img src="imgs/7. ExtendedEuclidean/GCDEquation.png">
+<img height="35" src="imgs/7. ExtendedEuclidean/GCDEquation.png">
 </p>
 
 The extension allows us to find this equation. To understand the importance of this, say we reduced both sides by mod a. The left side is a divisor of a and is therefore smaller than a, it doesn’t reduce any further. But what happens to the right side? Obviously it reduces to d as that is what the equation says it equals, but is there any more information that can be gotten from that? Consider the following, because ra is a multiple of a, it reduces to zero.
@@ -470,7 +470,7 @@ property of r and s that we just found a little more explicitly.
 If the GCD is 1 then this means:
 
 <p align="center">
-<img src="imgs/7. ExtendedEuclidean/InverseProperty.png">
+<img height="70" src="imgs/7. ExtendedEuclidean/InverseProperty.png">
 </p>
 
 So if the GCD is 1, then r and s are the inverses of a mod b and b mod a! See 
@@ -487,7 +487,7 @@ equation (after the line), reverse the order of the equations, then isolate the
 remainders on the left-hand side. You should get what you see on the right.
 
 <p align="center">
-<img src="imgs/7. ExtendedEuclidean/EuclideanExample.png">
+<img height="70" src="imgs/7. ExtendedEuclidean/EuclideanExample.png">
 </p>
 
 Further altering the series of equations we got in the previous slide, on the 
@@ -498,7 +498,7 @@ left below, I have the specific outcome for our example, on the right, I have
 a more general form. Now I want to make some observations.
 
 <p align="center">
-<img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
+<img width="500" src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 </p>
 
 The left-hand side of the top equation is the isolated gcd. The right hand side 
@@ -511,7 +511,7 @@ into the equation of the next remainder, which is exactly what we will do.
 Taking the example equations we set up, look at the first two.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/ExampleFirstPart.png">
+ <img width="500" src="imgs/7. ExtendedEuclidean/ExampleFirstPart.png">
 </p>
 
 Now take the equation for 15 (the second equation) and plug it into 15 in the 
@@ -520,33 +520,33 @@ preserve the form and also make explicit a pattern that we will use to make an
 algorithm using matrices (specifically look at the last two equations).
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
+ <img height="70" src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
 </p>
 
 Looking at our original series of equations replace the first two that we 
 used with the single equation that we just derived.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/NewSeries1.png">
+ <img width="500" src="imgs/7. ExtendedEuclidean/NewSeries1.png">
 </p>
 
 Now take the second equation and plug the remainder 18 into the 18 of the first 
 equation and reduce (this is simply repeating the process we did before).
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/SecondPartProcess.png">
+ <img height="100" src="imgs/7. ExtendedEuclidean/SecondPartProcess.png">
 </p>
 
 Again, replace the first two equations with the new one.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/FinalSeries.png">
+ <img width="500" src="imgs/7. ExtendedEuclidean/FinalSeries.png">
 </p>
 
 And repeat the process.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/ThirdPartProcess.PNG">
+ <img height="70" src="imgs/7. ExtendedEuclidean/ThirdPartProcess.PNG">
 </p>
 
 Now see that the last equation is the exact one we are looking for! The 
@@ -558,7 +558,7 @@ that showed up in the process, now we are going to use them to create matrices.
 First, lets layout those forms in order.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/ImportantParts.png">
+ <img width="500" src="imgs/7. ExtendedEuclidean/ImportantParts.png">
 </p>
 
 Look at the two pairs of parenthesis. Let’s say the first pair holds the first 
@@ -572,7 +572,7 @@ equation? Notice that in our second equation, our first parenthesis
 (our vectors first index) has one times the second index of the initial vector, so the first row of our matrix is \[0  1]. The second parenthesis (second index) is the second index multiplied by -15 plus the first index. So our second row is \[1  -15]. We now have enough to write the following equation.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/FirstLinearTransformation.png">
+ <img width="400" src="imgs/7. ExtendedEuclidean/FirstLinearTransformation.png">
 </p>
 
 To understand where the negative fifteen came from, look at the original series
@@ -588,7 +588,7 @@ the next negative quotient (in this case -3) plus the old first index. This
 pattern will continue to the end so here is all the matrices to save time.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/AllTransformations.png">
+ <img height="45" src="imgs/7. ExtendedEuclidean/AllTransformations.png">
 </p>
 
 Just so you can observe these matrices and the initial equations together,
@@ -597,14 +597,14 @@ except in the bottom right index which holds the negative quotients that can
 be seen in the equations.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
+ <img height="45" src="imgs/7. ExtendedEuclidean/AlteredForm.png">
 </p>
 
 See how -1, -3, -15, and -1 are just −𝑞_1, −𝑞_2, −𝑞_3, and −𝑞_4. This allows
 us to genralize the hold matrix process. Take the following diagram.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/GeneralTransformations.png">
+ <img width="500" src="imgs/7. ExtendedEuclidean/GeneralTransformations.png">
 </p>
 
 Now we are ready to put this into code. Take the following snippet. Notice That
@@ -614,7 +614,7 @@ the matrices according to how we just saw, and multiply the matrix and vector
 together, updating the vector V with the product.
 
 <p align="center">
- <img src="imgs/CodeSnippets/ExtendedPart1.PNG">
+ <img height="45" src="imgs/CodeSnippets/ExtendedPart1.PNG">
 </p>
 
 Finally, we return r and s. Notice that we reduce them by their respective modulo.
@@ -641,7 +641,7 @@ Before we move on, look back at the final equation that the extended algorithm
 gave us in our example.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/GCDEquationExample.png">
+ <img height="35" src="imgs/7. ExtendedEuclidean/GCDEquationExample.png">
 </p>
 
 Notice that this can be written as the following dot product of the vector of 
@@ -650,7 +650,7 @@ right). This is neat just to see the final connection, but seeing as how we are
 really just looking for _r_ and _s_, our algorithm doesn't care about this.
 
 <p align="center">
- <img src="imgs/7. ExtendedEuclidean/DotProductForm.PNG">
+ <img height="45" src="imgs/7. ExtendedEuclidean/DotProductForm.PNG">
 </p>
 
 ## 8. The Chinese Remainder Theorem
