@@ -454,18 +454,24 @@ that:
 
 The extension allows us to find this equation. To understand the importance of this, say we reduced both sides by mod a. The left side is a divisor of a and is therefore smaller than a, it doesn’t reduce any further. But what happens to the right side? Obviously it reduces to d as that is what the equation says it equals, but is there any more information that can be gotten from that? Consider the following, because ra is a multiple of a, it reduces to zero.
 
+<p align="center">
 <img src="imgs/7. ExtendedEuclidean/PropertyOfGCDEquation.png">
+</p>
 
 This shows that s is a number that when multiplied by b and reduced mod a 
 becomes the GCD. By symmetric reasoning, r will multiply by a and reduce mod b 
 to become the GCD as well. What if the GCD is 1? First, let's state the 
 property of r and s that we just found a little more explicitly.
 
+ <p align="center">
 <img src="imgs/7. ExtendedEuclidean/PropertyOfGCDEquation2.png">
+</p>
 
 If the GCD is 1 then this means:
 
+<p align="center">
 <img src="imgs/7. ExtendedEuclidean/InverseProperty.png">
+</p>
 
 So if the GCD is 1, then r and s are the inverses of a mod b and b mod a! See 
 that this inverse only exists if the GCD is 1, meaning a and b must be 
@@ -480,7 +486,9 @@ Take the basic Euclidean algorithm example done on the left. Cut off the last
 equation (after the line), reverse the order of the equations, then isolate the 
 remainders on the left-hand side. You should get what you see on the right.
 
+<p align="center">
 <img src="imgs/7. ExtendedEuclidean/EuclideanExample.png">
+</p>
 
 Further altering the series of equations we got in the previous slide, on the 
 right-hand side explicitly give a coefficient of 1 in parenthesis for all 
@@ -489,7 +497,9 @@ coefficients in parenthesis, move the negative into the coefficient. On the
 left below, I have the specific outcome for our example, on the right, I have 
 a more general form. Now I want to make some observations.
 
+<p align="center">
 <img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
+</p>
 
 The left-hand side of the top equation is the isolated gcd. The right hand side 
 of the bottom equation is a multiple of _a_ plus a multiple of _b_. If we can 
@@ -500,32 +510,44 @@ into the equation of the next remainder, which is exactly what we will do.
 
 Taking the example equations we set up, look at the first two.
 
-<img src="imgs/7. ExtendedEuclidean/ExampleFirstPart.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/ExampleFirstPart.png">
+</p>
 
 Now take the equation for 15 (the second equation) and plug it into 15 in the 
 first equation. Then we simplify, but we will do it in a specific way to 
 preserve the form and also make explicit a pattern that we will use to make an 
 algorithm using matrices (specifically look at the last two equations).
 
-<img src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/FirstPartProcess.PNG">
+</p>
 
 Looking at our original series of equations replace the first two that we 
 used with the single equation that we just derived.
 
-<img src="imgs/7. ExtendedEuclidean/NewSeries1.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/NewSeries1.png">
+</p>
 
 Now take the second equation and plug the remainder 18 into the 18 of the first 
 equation and reduce (this is simply repeating the process we did before).
 
-<img src="imgs/7. ExtendedEuclidean/SecondPartProcess.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/SecondPartProcess.png">
+</p>
 
 Again, replace the first two equations with the new one.
 
-<img src="imgs/7. ExtendedEuclidean/FinalSeries.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/FinalSeries.png">
+</p>
 
 And repeat the process.
 
-<img src="imgs/7. ExtendedEuclidean/ThirdPartProcess.PNG">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/ThirdPartProcess.PNG">
+</p>
 
 Now see that the last equation is the exact one we are looking for! The 
 extension to Euclid's algorithm is to collapse the equations together to get 
@@ -535,7 +557,9 @@ Hopefully you saw my little notes that said to remember the specific equations
 that showed up in the process, now we are going to use them to create matrices. 
 First, lets layout those forms in order.
 
-<img src="imgs/7. ExtendedEuclidean/ImportantParts.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/ImportantParts.png">
+</p>
 
 Look at the two pairs of parenthesis. Let’s say the first pair holds the first 
 index of a vector and the second parenthesis holds the second index. The second 
@@ -547,7 +571,9 @@ What is the transformation that turns our first equation into that third
 equation? Notice that in our second equation, our first parenthesis 
 (our vectors first index) has one times the second index of the initial vector, so the first row of our matrix is \[0  1]. The second parenthesis (second index) is the second index multiplied by -15 plus the first index. So our second row is \[1  -15]. We now have enough to write the following equation.
 
-<img src="imgs/7. ExtendedEuclidean/FirstLinearTransformation.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/FirstLinearTransformation.png">
+</p>
 
 To understand where the negative fifteen came from, look at the original series
 of equations and notice that negative fifteen was the negative of our second
@@ -561,19 +587,25 @@ the previous vector. The new second index is the old second index multiplied by
 the next negative quotient (in this case -3) plus the old first index. This 
 pattern will continue to the end so here is all the matrices to save time.
 
-<img src="imgs/7. ExtendedEuclidean/AllTransformations.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/AllTransformations.png">
+</p>
 
 Just so you can observe these matrices and the initial equations together,
 here are the initial equations again. See how the matrices are all the same
 except in the bottom right index which holds the negative quotients that can
 be seen in the equations.
 
-<img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/AlteredForm.png">
+</p>
 
 See how -1, -3, -15, and -1 are just −𝑞_1, −𝑞_2, −𝑞_3, and −𝑞_4. This allows
 us to genralize the hold matrix process. Take the following diagram.
 
-<img src="imgs/7. ExtendedEuclidean/GeneralTransformations.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/GeneralTransformations.png">
+</p>
 
 Now we are ready to put this into code. Take the following snippet. Notice That
 basic Euclidean algorithm is used, but we save each quotient that we come across.
@@ -581,13 +613,17 @@ For the extended part we use numpy on python to set up a vector V. Then we creat
 the matrices according to how we just saw, and multiply the matrix and vector 
 together, updating the vector V with the product.
 
-<img src="imgs/CodeSnippets/ExtendedPart1.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/ExtendedPart1.PNG">
+</p>
 
 Finally, we return r and s. Notice that we reduce them by their respective modulo.
 This is simply to keep it within our world of modular arithmetic, and it will solve
 the fact that one of the values would have been negative.
 
-<img src="imgs/CodeSnippets/ExtendedPart2.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/ExtendedPart2.PNG">
+</p>
 
 And now we are ready to create our keys for basic RSA. For the primes and the 
 encrypting exponent, I hard code answers. In reality, the primes need to be 
@@ -597,59 +633,81 @@ If you look back at the process we outlined for key creation, you will see
 this function is simply a step by step implementation of that, using all we
 have learned.
 
-<img src="imgs/CodeSnippets/KeyCreationBasic.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/KeyCreationBasic.PNG">
+</p>
 
 Before we move on, look back at the final equation that the extended algorithm 
 gave us in our example.
 
-<img src="imgs/7. ExtendedEuclidean/GCDEquationExample.png">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/GCDEquationExample.png">
+</p>
 
 Notice that this can be written as the following dot product of the vector of 
 _r_ and _s_ and a vector containing 1158 and 873 (example on left, general on 
 right). This is neat just to see the final connection, but seeing as how we are 
 really just looking for _r_ and _s_, our algorithm doesn't care about this.
 
-<img src="imgs/7. ExtendedEuclidean/DotProductForm.PNG">
+<p align="center">
+ <img src="imgs/7. ExtendedEuclidean/DotProductForm.PNG">
+</p>
 
 ## 8. The Chinese Remainder Theorem
 
-Now we are ready to add the chinese remainder theorem. First we will look
+Now we are ready to start on the chinese remainder theorem. First we will look
 at the theorem itself in general, then we will see what it means for RSA.
 
 The Chinese Remainder Theorem (CRT) is about answering the following type of 
 question. If I have h mod a and k mod b, is there a number x that is congruent 
 to both numbers? If so, what is it?
 
-<img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
+</p>
 
-In fact, CRT asks this question for an arbitrary amount of numbers. We could 
-add 'a j mod c, a g mod d and so on. However, for RSA we are going to look at 
-just two numbers so we’ll keep it at that for now. A little bit of thought will 
+In fact, CRT asks this question for an arbitrary amount of numbers. On top of h mod a and k mod b we could 
+add j mod c g mod d and more and ask if there is an x that satisfies being congruent
+to all of them; however, for RSA we are going to look at 
+just two numbers so we’ll keep it at two here. A little bit of thought on your own will 
 show how all results can generalize to larger amounts of numbers. Let’s 
 understand this question better by looking at an example.
 
-<img src="imgs/8. ChineseRemainderTheorem/QuestionExample.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/QuestionExample.png">
+</p>
 
 Is there an x that is congruent to both of these? Let’s try to create such an 
 x. Were going to try to create a number in two parts, the mod 5 part and the 
 mod 4 part.
 
-<img src="imgs/8. ChineseRemainderTheorem/ExampleProcess1.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess1.png">
+</p>
 
-In the mod 5 section, I want a number that will reduce to 3, but I also don’t 
-want it to interfere with the mod 4 section (and vice versa). To stop it from 
-interfering with the mod 4 section, I could multiply everything in the mod 5 
-section by 4. That way, when I reduce mod 4 it will reduce to zero. Likewise, I 
-can put a five in the mod 4 section for a symmetric effect.
+To make sense of why we started like this, say that in the mod 5 section put a number that will reduce to 3, but in the mod 4 section we multiply whatever goes there by 5.
+If we reduced the whole number by five, the mod 5 section would reduce to three and the
+mod 4 section would reduce to 0, causing the whole expression to be 3 mod 5. Likewise,
+if I multiply the mod 5 section by 4 and make sure the mod 4 section has a number that 
+reduces to 2 mod 4, then the entire section will reduce to 2 mod 4. After we do this,
+we can gaurantee that we have found a candidate for x.
 
-<img src="imgs/8. ChineseRemainderTheorem/ExampleProcess2.png">
+In the following image we placed a 4 in the mod 5 section and a 5 in the mod 4 section,
+everything we put in these sections will be multiplied by these numbers, allowing us 
+to zero out the other section when we reduce by either 4 or 5.
+
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess2.png">
+</p>
 
 So now the question is whether there is a number I can multiply by 4 and reduce 
 by 5 to get 3. Likewise, is there a number that multiplies by 5 and reduces by 
 4 to get 2? A little guess and check will confirm the following numbers as 
 valid (we will soon move beyond guess and check, don’t worry).
 
-<img src="imgs/8. ChineseRemainderTheorem/ExampleProcess3.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/ExampleProcess3.png">
+</p>
 
 We now have a value for x, but is this the only answer? Say we multiplied 5 
 times 4 together and get 20, what would happen if we added 20 to x? If we 
@@ -657,155 +715,206 @@ reduced it mod 5 this number we are adding reduces to zero and so doesn’t stop
 x from reducing to 3 mod 5. The same happens with mod 4. So adding 20, or any 
 multiple of 20, will always return a valid value for x. All numbers that can be 
 created such a way will reduce to a single value mod 20, so the complete answer 
-can be stated as follow:
+can be stated as follows:
 
-<img src="imgs/8. ChineseRemainderTheorem/ExampleAnswer.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/ExampleAnswer.png">
+</p>
 
-Let’s take it up a notch. Can I create a method to reconstruct x for any 
-arbitrary number in mod 4 and any number mod 5? A method where I can always 
-find x where 
+Let’s take it up a notch. Can we create a method to reconstruct x for any 
+arbitrary number in mod 4 and any number mod 5? A method where we can always 
+find x where:
 
-<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralQuestion.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralQuestion.png">
+</p>
 
-Now I can’t do the guess and check like before (and good riddance), so this 
+We can’t do the guess and check like before (and good riddance), so this 
 method needs to be far more algorithmically sound. First, lets start as we did 
-before by placing 4 in a mod 5 section and 5 in a mod 4 section.
+before by placing 4 in the mod 5 section and 5 in the mod 4 section.
 
-<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess1.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess1.png">
+</p>
 
-But now ask, what if I found a number that was the inverse of 4 mod 5 and 
+Now consider this question: what if we found a number that was the inverse of 4 mod 5 and 
 multiplied it into the mod 5 section? By definition, the mod 5 section would 
 reduce to one. The same could be done by putting the inverse of 5 mod 4 in the 
-mod 4 section. Then, if I multiply h into the mod 5 section, x would reduce to 
+mod 4 section. Then, if we multiply h into the mod 5 section, x would reduce to 
 h mod 5, whatever h is. Likewise with k in the mod 4 section.
 
 So we need to find a number that is the inverse of 4 mod 5 and the inverse of 5 
 mod 4. Thankfully, the extended Euclidean algorithm finds both of these at the 
 same time! Doing the  work, we find that:
 
-<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess2.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess2.png">
+</p>
 
 So x can be set up as follows.
 
-<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess3.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralProcess3.png">
+</p>
 
-Finally, remember that all possible x's are congruent to this x mod 5 times 4.
+Finally, remember that all possible x's are congruent to this x within the modulus of 5 times 4.
 
-<img src="imgs/8. ChineseRemainderTheorem/SlightGeneralAnswer.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/SlightGeneralAnswer.png">
+</p>
 
 To take it up one more notch, lets now work with any generic modulus number, 
 rather than 4 and 5. Going through the same logic that we have already done, 
 you can see that if you want an x where 
 
-<img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/InitialQuestion.png">
+</p>
 
 Then x can be constructed as
 
-<img src="imgs/8. ChineseRemainderTheorem/GeneralAnswer.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/GeneralAnswer.png">
+</p>
 
-Notice that that we can only find r and is if a and b are coprime, otherwise 
+Remember from the extended euclidean algorithm that that we can only find these 
+inverses (r and s) if a and b are coprime, otherwise 
 the inverses don’t exist. This is the general conclusion of CRT, that x exists 
-if the modulo numbers are coprime and can be constructed according to the 
+if the modulo numbers are coprime and can be constructed through to the 
 formula above.
 
-Let’s now build up to why CRT can help us in RSA. First lets say we have the 
+We need a few more results before we rejoin RSA. First lets say we have the 
 inverses of our primes (found using the extended Euclidean):
 
-<img src="imgs/8. ChineseRemainderTheorem/PrimeInverses.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/PrimeInverses.png">
+</p>
 
-Now let’s say we have a number k mod n. Remember that n is the semiprime made 
-of multiplying p and q together. We can break k into mod p and mod q and 
-reassemble it using r and s.
+Let’s say we have a number k mod n (remember that n is the semiprime made 
+of multiplying p and q together). See below how we can break k into mod p and mod q and 
+reassemble it using r and s?
 
-<img src="imgs/8. ChineseRemainderTheorem/BreakAndBuildProcess.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/BreakAndBuildProcess.png">
+</p>
 
-Now let me define two functions. First is delta, it takes a number mod n and 
-breaks it into an ordered pair.
+Inspired by this, let us define two functions. First is delta, it takes a number mod n 
+and breaks it into an ordered pair.
 
-<img src="imgs/8. ChineseRemainderTheorem/Delta.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/Delta.png">
+</p>
 
-Notice how delta does the ‘break apart’ process from CRT? Now define delta 
+Notice how delta does the ‘break apart’ process we just saw? Now define delta 
 inverse. It takes in the ordered pair and puts out a number mod n.
 
-<img src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
+</p>
 
-This function clearly does the ‘stitching together’ process that we found in 
-CRT. See how delta inverse undoes delta?
+This function clearly does the ‘stitching together’ part. See how delta inverse undoes delta (which is obviously why I referred to it as the inverse)?
 
-<img src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
+</p>
 
-Now for some more symbols. The symbol on the left means “the set of integers 
-mod n”, the symbol on the right means “the set of ordered pairs containing an 
+Here let's introduce some more symbols. The symbol on the left means “the set of integers mod n”, the symbol on the right means “the set of ordered pairs containing an 
 integer mod p and an integer mod q”.
 
-<img src="imgs/8. ChineseRemainderTheorem/Integers.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/Integers.png">
+</p>
 
-n this context, an arrow from one set to another means that the set is “mapped” 
-to the set it points to. In other words, its elements are mapped to the 
-elements of the other set. If a function is put above the arrow, it shows that 
-the function is what is defining the mapping (there’s another way of notating 
-this that is more common, but this way is more convenient for us for reasons 
-that will make sense in a second). Using this notation, see that delta ‘maps’ 
-from the set of integers mod n to the set of ordered pairs, and delta inverse 
-maps in the opposite direction.
+Looking at the delta function, you could say that it 'maps' from an element of that
+set symbolized on the left onto an element of the set of ordered pairs on the right.
+We symbolize this in the image below. An arrow from one set to another means that the 
+set is mapped to the set it points to. By putting a function above the arrow, we are
+saying that the function is the one defining the mapping. Using this notation, we can
+write that that delta maps from the set of integers mod n to the set of ordered pairs,  
+and delta inverse maps in the opposite direction.
 
-<img src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
+</p>
 
 We are almost ready to tie this into RSA encryption, we just need one more 
 important result from CRT. First, there is a rule in modular arithmetic that 
 states: 
 
-<img src="imgs/8. ChineseRemainderTheorem/MultiplicationRule.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/MultiplicationRule.png">
+</p>
 
-Using this rule, see if you can follow this:
+Using this rule, we show that squaring a number and reducing it mod n is
+the same thing as breaking the number apart, squaring it, and then reassembling
+it by CRT.
 
-<img src="imgs/8. ChineseRemainderTheorem/ExponentWithCRT.png">
+<p align="center">
+ <img src="imgs/8. ChineseRemainderTheorem/ExponentWithCRT.png">
+</p>
 
-It's messy, but the diagram shows that taking the exponent on the number and 
-breaking it apart is the same as first breaking it apart and taking it to the 
-exponent (the logic can be generalized to any positive whole number exponent, 
-not just squaring).
+Obviously, this logic can be generalized to any positive whole number exponent, 
+not just squaring. Now we are ready for RSA.
 
 ## 9. RSA With CRT
 
-The last section ended off by showing that CRT preserves exponents. So what if 
+The last section ended off by showing that our delta and delta inverse functions preserve exponents. So what if 
 we defined a function that took an ordered pair of numbers each to the 
 encrypting exponent? Take the following function E, the encrypting function.
 
-<img src="imgs/9. RSAwithCRT/EncryptionFunction.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/EncryptionFunction.png">
+</p>
 
 (NOTE: To encrypt like this you need the primes to break apart the numbers, 
-which defeats the point of RSA, but this thought exercise helps us move into he 
+which defeats the point of RSA, but this thought exercise will help us move into he 
 decryption with CRT process. So real world encryption will stay the same as it 
 was in basic RSA, but we are going to develop a better way to decrypt.)
 
 Now recall Eulers Theorem that stated:
 
-<img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+<p align="center">
+ <img src="imgs/5. ProvingBasicKeys/EulersTheorem.png">
+</p>
 
 And remember that phi of a prime can be shown to be the prime minus 1.
 
-<img src="imgs/4. EulersTotient/Prime.png">
+<p align="center">
+ <img src="imgs/4. EulersTotient/Prime.png">
+</p>
 
 Say e was greater than p - 1. Define the following.
 
-<img src="imgs/9. RSAwithCRT/e1.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/e1.png">
+</p>
 
-Putting this together, look at how we can reduce the size of an exponent mod p 
-from e to our new exponent e1 by using Eulers Theorem.
+Putting these together, look at how we can reduce the size of an exponent mod p 
+from e to our new exponent e1 by using Eulers Theorem. We start with a number to the
+power of e. By the definition of e1, it is simply e plus some multiple of p-1, so we
+can break e into e1 plus m(p-1), and then break the number apart by exponent rules.
+Then the number that is being taken to m(p-1) is a number being taken to phi of p, so
+we can reduce it to 1 (by eulers theorem). This little fact allows us to significantly
+reduce our encrypting exponent.
 
-<img src="imgs/9. RSAwithCRT/ReducingExponent.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/ReducingExponent.png">
+</p>
 
 Using all this, let's redefine our encryption function E to the following:
 
-<img src="imgs/9. RSAwithCRT/EncryptionFunctionReducedExponent.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/EncryptionFunctionReducedExponent.png">
+</p>
 
 Encryption using CRT can then be shown using the following diagram 
 (hypothetically of course, because this needs the primes it is a worthless 
 algorithm, but decryption in CRT is the process of reversing this so it's here 
 for the setup).
 
-<img src="imgs/9. RSAwithCRT/EncryptionAlgorithm.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/EncryptionAlgorithm.png">
+</p>
 
 (NOTE: the arrow on the left is dotted because that is how the basic RSA 
 algorithm would compute it. We don't actually compute that in CRT, but it's 
@@ -817,19 +926,25 @@ is of our E function. But that just means we need exponents, d1 and d2, that
 We already proved the inverse of an encrypting exponent in mod phi of the 
 modulo will give the decrypting exponent, so define the following:
 
-<img src="imgs/9. RSAwithCRT/DecryptionExponents.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/DecryptionExponents.png">
+</p>
 
 See now that our decryption function can be defined as follows:
 
-<img src="imgs/9. RSAwithCRT/DecryptionFunction.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/DecryptionFunction.png">
+</p>
 
-So the decryption algorithm using CRT can be shown in the diagram below. We 
+The decryption algorithm using CRT can be shown in the diagram below. We 
 take our encrypted number h, pass it into the Delta function, pass the ordered
 pair into the decryption function, then pass that ordered pair into Delta 
 Inverse. This gives the same answer as though we had taken h to the basic 
 decryption exponent and reduced mod n.
 
-<img src="imgs/9. RSAwithCRT/DecryptionAlgorithm.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/DecryptionAlgorithm.png">
+</p>
 
 So why would we want to use CRT to decrypt? Notice how we are operating in mod 
 p and mod q, with exponents smaller than p-1 and q-1? This makes each operation 
@@ -840,23 +955,78 @@ Now lets look at RSA with CRT over all. First let’s start with the setup, then
 we’ll look at the algorithm.
 
 The public key remains the same as we are not using CRT to encrypt, but the 
-private key is quite a bit more complex, along with the process of creating it. 
-Now lets look at the algorithm. Remember, r and s can be found at the same time 
-by plugging p and q into the extended Euclidean algorithm!
+private key is quite a bit more complex, and so is the process of creating it. 
+First we choose our primes, then we find n and phi of n. Third, we create e and
+make sure it is coprime to phi of n (so far the same as basic RSA). Then we find
+e1 and e2 and use those to create d1 and d2. We find the inverse of of the each 
+prime mod the other and use those to set up delta inverse. The public key is the 
+same ordered pair as before, but the decryption key is now the tuple of p, q, d1,
+d2, and delta inverse. (Remember, r and s can be found at the same time 
+by plugging p and q into the extended Euclidean algorithm.)
 
-<img src="imgs/9. RSAwithCRT/KeyCreation.png">
+Notice that delta inverse is created but not delta, that is because delta doesn't 
+require any more information than p and q, which we already have. Also note the form
+we wrote delta inverse in. It is written as the dot product of two tuples. If we define
+this dot product the same as for vectors we see that this creates exactly the formula
+for delta inverse (minus the "mod n" at the end, which I left out on accident but 
+shouldn't cause any real confusion). The reason for this tuple dot product form is
+simple, the first tuple is information we have at the beginning. It's a tuple we can
+create and store from the start. The second tuple is the input to the function. 
+Therefore, creating and storing the first tuple is the same thing as creating the
+function delta inverse. That is how we will do it in the code, we will create the 
+tuple (qr, ps) and store it in the variable "delta_inverse," the the function will
+be simply doing to the tuple dot product and reducing mod n.
 
-Let's put this into code. Here is a key generating function for RSA encryption
-using the Chinese Remainder Theorem.
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/KeyCreation.png">
+</p>
 
-<img src="imgs/CodeSnippets/KeyCreationCRT.PNG">
+Let's put this key creation into code. Here is a key generating function for RSA encryption using the Chinese Remainder Theorem. See that each section lines up
+exactly with the diagram above, so I won't go into explaining it. I simply want to
+point out that the "ta" variable that catches a value from the extended euclidean
+stands for "throw away" because I don't need that value.
 
+<p align="center">
+ <img src="imgs/CodeSnippets/KeyCreationCRT.PNG">
+</p>
+ 
 Now for the algorithm. The version on the left is the more verbose, the one on 
-the right is the condensed version.
+the right is the condensed version. Encryption is the same, decryption is as we have
+already laid out.
 
-<img src="imgs/9. RSAwithCRT/Algorithm.png">
+<p align="center">
+ <img src="imgs/9. RSAwithCRT/Algorithm.png">
+</p>
 
 As complicated as it was to get here, the coding process is extremely simple, 
-so lets look at some code.
+so lets look at some code. We get the go, pass through delta, conduct the 
+decryption algorithm, then pass through delta inverse. That's it.
 
-<img src="imgs/CodeSnippets/DecryptionCRT.PNG">
+<p align="center">
+ <img src="imgs/CodeSnippets/DecryptionCRT.PNG">
+</p>
+
+## The Provided Code
+
+I provided two python files, one for the basic algorithm, the other for the CRT algorithm. The important parts have already been covered, but here's the rest. 
+The programs main will call the key generating function, shows the keys, asks for
+a message, then encodes (by converting character into ascii value), encrypts, decrypts,
+and finally decodes the message. Each step is saved and printed to show that it
+worked.
+
+Several things to note with the code. First of all, the primes and exponent were hard
+coded examples. Actually creating a random large prime generator is not in our scope.
+Also, the program is not made to deal with large numbers. If you try to get large 
+primes without sufficiently altering the code, python will lose precision by auto 
+converting to floats and the algorithm will fail. 
+
+Also, converting characters into ascii valued integers is not standard security practice, it's just what I did here for convenience.
+
+Generally what I'm saying is that this code is to show the math and does not hold up
+under any professional security scrutiny. With that being said, I hope this helped!
+
+Here is a snippet showing the code running.
+
+<p align="center">
+  <imp src="">
+</p>
