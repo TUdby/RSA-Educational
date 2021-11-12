@@ -546,7 +546,7 @@ Again, replace the first two equations with the new one.
 And repeat the process.
 
 <p align="center">
- <img wdith="500" src="imgs/7. ExtendedEuclidean/ThirdPartProcess.PNG">
+ <img width="500" src="imgs/7. ExtendedEuclidean/ThirdPartProcess.PNG">
 </p>
 
 Now see that the last equation is the exact one we are looking for! The 
