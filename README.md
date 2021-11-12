@@ -1006,4 +1006,27 @@ decryption algorithm, then pass through delta inverse. That's it.
  <img src="imgs/CodeSnippets/DecryptionCRT.PNG">
 </p>
 
+## The Provided Code
 
+I provided two python files, one for the basic algorithm, the other for the CRT algorithm. The important parts have already been covered, but here's the rest. 
+The programs main will call the key generating function, shows the keys, asks for
+a message, then encodes (by converting character into ascii value), encrypts, decrypts,
+and finally decodes the message. Each step is saved and printed to show that it
+worked.
+
+Several things to note with the code. First of all, the primes and exponent were hard
+coded examples. Actually creating a random large prime generator is not in our scope.
+Also, the program is not made to deal with large numbers. If you try to get large 
+primes without sufficiently altering the code, python will lose precision by auto 
+converting to floats and the algorithm will fail. 
+
+Also, converting characters into ascii valued integers is not standard security practice, it's just what I did here for convenience.
+
+Generally what I'm saying is that this code is to show the math and does not hold up
+under any professional security scrutiny. With that being said, I hope this helped!
+
+Here is a snippet showing the code running.
+
+<p align="center">
+  <imp src="">
+</p>
