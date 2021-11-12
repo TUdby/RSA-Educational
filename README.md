@@ -999,7 +999,7 @@ already laid out.
 </p>
 
 As complicated as it was to get here, the coding process is extremely simple, 
-so lets look at some code. We get the go, pass through delta, conduct the 
+so lets look at some code. We get the key, pass through delta, conduct the 
 decryption algorithm, then pass through delta inverse. That's it.
 
 <p align="center">
@@ -1025,7 +1025,8 @@ Also, converting characters into ascii valued integers is not standard security 
 Generally what I'm saying is that this code is to show the math and does not hold up
 under any professional security scrutiny. With that being said, I hope this helped!
 
-Here is a snippet showing the code running.
+Here is a snippet showing the code running. Simply open the terminal in the directory, 
+type what you see on in the snippet, and give a message when prompted.
 
 <p align="center">
   <img src="imgs/CodeSnippets/run.png">
