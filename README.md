@@ -858,7 +858,7 @@ not just squaring. Now we are ready for RSA.
 
 ## 9. RSA With CRT
 
-The last section ended off by showing that CRT preserves exponents. So what if 
+The last section ended off by showing that our delta and delta inverse functions preserve exponents. So what if 
 we defined a function that took an ordered pair of numbers each to the 
 encrypting exponent? Take the following function E, the encrypting function.
 
@@ -867,7 +867,7 @@ encrypting exponent? Take the following function E, the encrypting function.
 </p>
 
 (NOTE: To encrypt like this you need the primes to break apart the numbers, 
-which defeats the point of RSA, but this thought exercise helps us move into he 
+which defeats the point of RSA, but this thought exercise will help us move into he 
 decryption with CRT process. So real world encryption will stay the same as it 
 was in basic RSA, but we are going to develop a better way to decrypt.)
 
@@ -889,8 +889,13 @@ Say e was greater than p - 1. Define the following.
  <img src="imgs/9. RSAwithCRT/e1.png">
 </p>
 
-Putting this together, look at how we can reduce the size of an exponent mod p 
-from e to our new exponent e1 by using Eulers Theorem.
+Putting these together, look at how we can reduce the size of an exponent mod p 
+from e to our new exponent e1 by using Eulers Theorem. We start with a number to the
+power of e. By the definition of e1, it is simply e plus some multiple of p-1, so we
+can break e into e1 plus m(p-1), and then break the number apart by exponent rules.
+Then the number that is being taken to m(p-1) is a number being taken to phi of p, so
+we can reduce it to 1 (by eulers theorem). This little fact allows us to significantly
+reduce our encrypting exponent.
 
 <p align="center">
  <img src="imgs/9. RSAwithCRT/ReducingExponent.png">
@@ -931,7 +936,7 @@ See now that our decryption function can be defined as follows:
  <img src="imgs/9. RSAwithCRT/DecryptionFunction.png">
 </p>
 
-So the decryption algorithm using CRT can be shown in the diagram below. We 
+The decryption algorithm using CRT can be shown in the diagram below. We 
 take our encrypted number h, pass it into the Delta function, pass the ordered
 pair into the decryption function, then pass that ordered pair into Delta 
 Inverse. This gives the same answer as though we had taken h to the basic 
@@ -950,31 +955,55 @@ Now lets look at RSA with CRT over all. First let’s start with the setup, then
 we’ll look at the algorithm.
 
 The public key remains the same as we are not using CRT to encrypt, but the 
-private key is quite a bit more complex, along with the process of creating it. 
-Now lets look at the algorithm. Remember, r and s can be found at the same time 
-by plugging p and q into the extended Euclidean algorithm!
+private key is quite a bit more complex, and so is the process of creating it. 
+First we choose our primes, then we find n and phi of n. Third, we create e and
+make sure it is coprime to phi of n (so far the same as basic RSA). Then we find
+e1 and e2 and use those to create d1 and d2. We find the inverse of of the each 
+prime mod the other and use those to set up delta inverse. The public key is the 
+same ordered pair as before, but the decryption key is now the tuple of p, q, d1,
+d2, and delta inverse. (Remember, r and s can be found at the same time 
+by plugging p and q into the extended Euclidean algorithm.)
+
+Notice that delta inverse is created but not delta, that is because delta doesn't 
+require any more information than p and q, which we already have. Also note the form
+we wrote delta inverse in. It is written as the dot product of two tuples. If we define
+this dot product the same as for vectors we see that this creates exactly the formula
+for delta inverse (minus the "mod n" at the end, which I left out on accident but 
+shouldn't cause any real confusion). The reason for this tuple dot product form is
+simple, the first tuple is information we have at the beginning. It's a tuple we can
+create and store from the start. The second tuple is the input to the function. 
+Therefore, creating and storing the first tuple is the same thing as creating the
+function delta inverse. That is how we will do it in the code, we will create the 
+tuple (qr, ps) and store it in the variable "delta_inverse," the the function will
+be simply doing to the tuple dot product and reducing mod n.
 
 <p align="center">
  <img src="imgs/9. RSAwithCRT/KeyCreation.png">
 </p>
 
-Let's put this into code. Here is a key generating function for RSA encryption
-using the Chinese Remainder Theorem.
+Let's put this key creation into code. Here is a key generating function for RSA encryption using the Chinese Remainder Theorem. See that each section lines up
+exactly with the diagram above, so I won't go into explaining it. I simply want to
+point out that the "ta" variable that catches a value from the extended euclidean
+stands for "throw away" because I don't need that value.
 
 <p align="center">
  <img src="imgs/CodeSnippets/KeyCreationCRT.PNG">
 </p>
  
 Now for the algorithm. The version on the left is the more verbose, the one on 
-the right is the condensed version.
+the right is the condensed version. Encryption is the same, decryption is as we have
+already laid out.
 
 <p align="center">
  <img src="imgs/9. RSAwithCRT/Algorithm.png">
 </p>
 
 As complicated as it was to get here, the coding process is extremely simple, 
-so lets look at some code.
+so lets look at some code. We get the go, pass through delta, conduct the 
+decryption algorithm, then pass through delta inverse. That's it.
 
 <p align="center">
  <img src="imgs/CodeSnippets/DecryptionCRT.PNG">
 </p>
+
+
