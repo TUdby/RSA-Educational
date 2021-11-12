@@ -774,7 +774,7 @@ you can see that if you want an x where
 Then x can be constructed as
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/GeneralAnswer.png">
+ <img width="350" src="imgs/8. ChineseRemainderTheorem/GeneralAnswer.png">
 </p>
 
 Remember from the extended euclidean algorithm that that we can only find these 
@@ -795,7 +795,7 @@ of multiplying p and q together). See below how we can break k into mod p and mo
 reassemble it using r and s?
 
 <p align="center">
- <img src="imgs/8. ChineseRemainderTheorem/BreakAndBuildProcess.png">
+ <img width="300" src="imgs/8. ChineseRemainderTheorem/BreakAndBuildProcess.png">
 </p>
 
 Inspired by this, let us define two functions. First is delta, it takes a number mod n 
@@ -809,20 +809,20 @@ Notice how delta does the ‘break apart’ process we just saw? Now define delt
 inverse. It takes in the ordered pair and puts out a number mod n.
 
 <p align="center">
- <img height="35" src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
+ <img height="55" src="imgs/8. ChineseRemainderTheorem/DeltaInverse.png">
 </p>
 
 This function clearly does the ‘stitching together’ part. See how delta inverse undoes delta (which is obviously why I referred to it as the inverse)?
 
 <p align="center">
- <img height="35" src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
+ <img height="55" src="imgs/8. ChineseRemainderTheorem/DeltaAndInverseIdentity.png">
 </p>
 
 Here let's introduce some more symbols. The symbol on the left means “the set of integers mod n”, the symbol on the right means “the set of ordered pairs containing an 
 integer mod p and an integer mod q”.
 
 <p align="center">
- <img height="35" src="imgs/8. ChineseRemainderTheorem/Integers.png">
+ <img height="55" src="imgs/8. ChineseRemainderTheorem/Integers.png">
 </p>
 
 Looking at the delta function, you could say that it 'maps' from an element of that
@@ -830,11 +830,11 @@ set symbolized on the left onto an element of the set of ordered pairs on the ri
 We symbolize this in the image below. An arrow from one set to another means that the 
 set is mapped to the set it points to. By putting a function above the arrow, we are
 saying that the function is the one defining the mapping. Using this notation, we can
-write that that delta maps from the set of integers mod n to the set of ordered pairs,  
+write that that delta maps from the set of integers mod n to the set of ordered pairs, 
 and delta inverse maps in the opposite direction.
 
 <p align="center">
- <img height="90" src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
+ <img height="150" src="imgs/8. ChineseRemainderTheorem/DeltasMapping.png">
 </p>
 
 We are almost ready to tie this into RSA encryption, we just need one more 
