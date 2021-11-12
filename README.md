@@ -15,7 +15,7 @@ RSA, we go over code snippits when appropriate and build up to the example code
 that we have provided. In going over RSA, the sections and the topics they 
 cover are:
 
- [1. The Basic Algorithm](## 1-the-basic-algorithm)
+ [1. The Basic Algorithm](# 1-the-basic-algorithm)
 
 Given the keys, how do we encyrpt and decrypt? In this section we do not
 yet build the key as that requires more math that we cover in later sections.
